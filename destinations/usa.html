@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study in USA with NexUni. Top universities, STEM programs, and scholarships.">
+    <title>Study in USA | NexUni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <img src="../assets/logo.png" alt="NexUni Logo" class="logo-img">
+                <span class="logo-text">NexUni</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#contact" class="btn btn-primary">Book Consultation</a>
+                <button id="theme-toggle" class="theme-toggle"><i data-lucide="moon"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" style="min-height: 60vh;">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="fade-in-up">Study in USA</h1>
+                <p class="fade-in-up delay-1">The land of opportunity. Flexible education system, cutting-edge
+                    technology, and vast career prospects.</p>
+                <div class="hero-buttons fade-in-up delay-2">
+                    <a href="../index.html#contact" class="btn btn-primary">Apply Now</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in-left delay-1">
+                <div
+                    style="width: 100%; height: 300px; background: rgba(50, 50, 150, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+                    <i data-lucide="flag" size="64" color="#334155"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Why Study in USA?</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Top Rankings</h3>
+                        <p>USA is home to the majority of the world's top-ranked universities.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>STEM OPT</h3>
+                        <p>Graduates in STEM fields can work for up to 3 years after graduation.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Flexible Credit System</h3>
+                        <p>Choose from a wide range of courses and majors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 NexUni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        lucide.createIcons();
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const icon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+        function updateIcon(theme) {
+            if (theme === 'dark') { icon.setAttribute('data-lucide', 'sun'); } else { icon.setAttribute('data-lucide', 'moon'); }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>
