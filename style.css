@@ -528,20 +528,51 @@ button {
     margin-bottom: 2rem;
 }
 
-/* Footer & Responsive Fixes */
+/* Footer - iOS 17.2 Glassmorphic Style */
 footer {
-    background: #0F172A;
-    /* Always dark navy, even in dark mode */
-    color: rgba(255, 255, 255, 0.6);
-    padding: 2rem 0;
+    position: relative;
+    background: linear-gradient(135deg,
+            rgba(15, 23, 42, 0.85) 0%,
+            rgba(30, 41, 59, 0.75) 50%,
+            rgba(15, 23, 42, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 2.5rem 0;
     font-size: 0.9rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 -10px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+/* Subtle gradient overlay for depth */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%,
+            rgba(212, 175, 55, 0.08) 0%,
+            transparent 60%);
+    pointer-events: none;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-info p {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    letter-spacing: 0.3px;
 }
 
 .social-links {
@@ -550,12 +581,62 @@ footer {
 }
 
 .social-links a {
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 0.3s ease;
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-links a:hover {
-    color: var(--accent-color);
+    color: #fff;
+    transform: translateY(-3px) scale(1.1);
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.4),
+        0 0 40px rgba(212, 175, 55, 0.2),
+        0 0 60px rgba(212, 175, 55, 0.1),
+        inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.social-links a::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: linear-gradient(135deg,
+            rgba(212, 175, 55, 0) 0%,
+            rgba(212, 175, 55, 0.3) 50%,
+            rgba(212, 175, 55, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.social-links a:hover::after {
+    opacity: 1;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
 }
 
 
