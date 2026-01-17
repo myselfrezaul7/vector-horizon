@@ -592,6 +592,75 @@ button {
     z-index: 1;
 }
 
+/* iOS-Style Glassmorphic Card */
+.cta-glass-card {
+    position: relative;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Gradient border glow effect */
+.cta-glass-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 26px;
+    background: linear-gradient(135deg,
+            rgba(212, 175, 55, 0.4) 0%,
+            transparent 30%,
+            transparent 70%,
+            rgba(212, 175, 55, 0.4) 100%);
+    z-index: -1;
+    opacity: 0.6;
+}
+
+/* Animated shine sweep */
+.cta-glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%);
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+}
+
+/* Inner glow orb */
+.cta-glass-card>* {
+    position: relative;
+    z-index: 1;
+}
+
 .cta h2 {
     color: white;
     margin-bottom: 1rem;
@@ -1520,6 +1589,12 @@ select:focus {
     /* CTA Section */
     .cta {
         padding: 4rem 0;
+    }
+
+    .cta-glass-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 20px;
+        margin: 0 0.5rem;
     }
 
     .cta h2 {
