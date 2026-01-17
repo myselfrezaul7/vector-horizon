@@ -475,11 +475,12 @@
         }
     }
 
-    function handleBookingSubmit(e) {
+    async function handleBookingSubmit(e) {
         e.preventDefault();
 
         const form = e.target;
         const modal = safeGetById('booking-modal');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
         // Get form values safely
         const getValue = (id) => {
@@ -492,10 +493,11 @@
         const phone = getValue('phone');
         const date = getValue('date');
         const time = getValue('time');
+        const educationLevel = getValue('education-level');
         const topic = getValue('topic');
 
         // Basic validation
-        if (!name || !email || !phone || !date || !time) {
+        if (!name || !email || !phone || !date || !time || !educationLevel) {
             alert('Please fill in all required fields.');
             return;
         }
@@ -507,22 +509,58 @@
             return;
         }
 
-        // Construct mailto link
-        const subject = encodeURIComponent(`Consultation Booking: ${name}`);
-        const body = encodeURIComponent(
-            `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nTopic: ${topic}\n\nPlease confirm my appointment.`
-        );
-
-        // Open email client
+        // Format date for display (DD/MM/YYYY)
+        let formattedDate = date;
         try {
-            window.location.href = `mailto:edunextep@gmail.com?subject=${subject}&body=${body}`;
-        } catch (err) {
-            console.error('Could not open email client', err);
-            alert('Could not open email client. Please contact us directly at edunextep@gmail.com');
+            const dateObj = new Date(date);
+            if (!isNaN(dateObj.getTime())) {
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const year = dateObj.getFullYear();
+                formattedDate = `${day}/${month}/${year}`;
+            }
+        } catch (e) {
+            // Use original date string if parsing fails
         }
 
-        closeModal(modal);
-        form.reset();
+        // Show loading state
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        // Prepare form data for Web3Forms
+        const formData = new FormData(form);
+        formData.set('name', name);
+        formData.set('email', email);
+        formData.set('phone', phone);
+        formData.set('date', formattedDate);
+        formData.set('time', time);
+        formData.set('education_level', educationLevel);
+        formData.set('topic', topic);
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('🎉 Booking confirmed! We will contact you soon.');
+                closeModal(modal);
+                form.reset();
+            } else {
+                throw new Error(result.message || 'Submission failed');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            alert('Sorry, there was an error sending your booking. Please try again or contact us directly at edunextep@gmail.com');
+        } finally {
+            // Reset button state
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
     }
 
     // ==========================================

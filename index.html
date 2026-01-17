@@ -299,37 +299,53 @@
                 <p>Select a time between 10 AM - 6 PM</p>
             </div>
             <form id="booking-form">
+                <!-- Web3Forms Configuration -->
+                <input type="hidden" name="access_key" value="85d432f5-81ae-4a84-b181-f32987280c43">
+                <input type="hidden" name="subject" value="New Consultation Booking - NexTep Edu">
+                <input type="hidden" name="from_name" value="NexTep Edu Website">
+                <input type="hidden" name="redirect" value="">
+
                 <div class="form-group">
-                    <label for="name">Full Name</label>
+                    <label for="name">Full Name <span class="required-star">*</span></label>
                     <input type="text" id="name" required placeholder="Enter your full name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Email Address <span class="required-star">*</span></label>
                     <input type="email" id="email" required placeholder="Enter your email">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Phone Number <span class="required-star">*</span></label>
                     <input type="tel" id="phone" required placeholder="01XXX-XXXXXX">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="date">Date</label>
+                        <label for="date">Date <span class="required-star">*</span></label>
                         <input type="date" id="date" required>
                     </div>
                     <div class="form-group">
-                        <label for="time">Time Slot</label>
+                        <label for="time">Time Slot <span class="required-star">*</span></label>
                         <select id="time" required>
                             <!-- Populated by JS -->
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="topic">Topic of Interest</label>
-                    <select id="topic">
+                    <label for="education-level">Interested Education <span class="required-star">*</span></label>
+                    <select id="education-level" required>
+                        <option value="" disabled selected>Select education level</option>
+                        <option value="Bachelor">Bachelor's Degree</option>
+                        <option value="Masters">Master's Degree</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="topic">Topic of Interest <span class="required-star">*</span></label>
+                    <select id="topic" required>
                         <option value="General Inquiry">General Inquiry</option>
                         <option value="University Admission">University Admission</option>
                         <option value="Visa Processing">Visa Processing</option>
                         <option value="Scholarships">Scholarships</option>
+                        <option value="Statement of Purpose (SOP)">Statement of Purpose (SOP)</option>
+                        <option value="Letter of Motivation (LOM)">Letter of Motivation (LOM)</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
