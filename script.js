@@ -28,14 +28,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
+    const scrollProgress = document.getElementById('scroll-progress');
+    const backToTop = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
+        // Navbar effect
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Scroll Progress Bar
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        if (scrollProgress) {
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+
+        // Back to Top Button visibility
+        if (backToTop) {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
     });
+
+    // Back to Top Click Handler
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
@@ -145,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const subject = `Consultation Booking: ${name}`;
             const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0ADate: ${date}%0D%0ATime: ${time}%0D%0ATopic: ${topic}%0D%0A%0D%0APlease confirm my appointment.`;
 
-            window.location.href = `mailto:nexunibd@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:edunextep@gmail.com?subject=${subject}&body=${body}`;
 
             modal.classList.remove('show');
             document.body.style.overflow = '';
