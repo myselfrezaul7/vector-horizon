@@ -6,7 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="NexTep Edu - Your Gateway to Global Education. Premier higher study consultancy in Bangladesh.">
+    <meta name="keywords"
+        content="study abroad, Bangladesh, education consultancy, UK, USA, Canada, Australia, university admission, visa">
+    <meta name="author" content="NexTep Edu">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="NexTep Edu | Build Your Future Abroad">
+    <meta property="og:description"
+        content="Expert guidance for students in Bangladesh dreaming of top universities worldwide.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/logo.png">
+
     <title>NexTep Edu | Build Your Future Abroad</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <link rel="apple-touch-icon" href="./assets/logo.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +37,9 @@
 </head>
 
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader">
@@ -102,7 +121,7 @@
         <div class="hero-background-blur"></div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Services Section -->
         <section id="services" class="section services">
             <div class="container">
@@ -260,7 +279,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <p>&copy; 2024 NexTep Edu. All rights reserved.</p>
+                    <p>&copy; <span id="footer-year">2025</span> NexTep Edu. All rights reserved.</p>
                 </div>
                 <div class="social-links">
                     <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
@@ -320,8 +339,30 @@
 
     <script src="script.js"></script>
     <script>
-        lucide.createIcons();
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        // Dynamic footer year
+        const yearEl = document.getElementById('footer-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
     </script>
+
+    <!-- Fallback for users without JavaScript -->
+    <noscript>
+        <style>
+            #preloader {
+                display: none !important;
+            }
+
+            .fade-in-up,
+            .fade-in-left,
+            .fade-in-right {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
 </body>
 
 </html>

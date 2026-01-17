@@ -13,6 +13,7 @@
     --text-secondary: #64748B;
     --success: #10B981;
     --error: #EF4444;
+    --nav-bg: rgba(255, 255, 255, 0.85);
 
     /* Typography */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
@@ -97,6 +98,26 @@ button {
 
 .hidden {
     display: none;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: #0F172A;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 10001;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
 }
 
 .flex {
@@ -355,7 +376,7 @@ button {
 
 /* Services */
 .services {
-    background-color: white;
+    background-color: var(--surface-color);
 }
 
 .services-grid {
@@ -456,7 +477,7 @@ button {
 
 /* Stories */
 .stories {
-    background-color: white;
+    background-color: var(--surface-color);
 }
 
 .stories-grid {
@@ -552,7 +573,7 @@ footer {
         top: 70px;
         left: 0;
         width: 100%;
-        background: white;
+        background: var(--surface-color);
         flex-direction: column;
         padding: 2rem;
         gap: 1.5rem;
