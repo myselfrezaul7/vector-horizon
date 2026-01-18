@@ -289,8 +289,17 @@ button {
 
 .hero-text h1 {
     font-size: 3.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     color: var(--primary-color);
+}
+
+.hero-tagline {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.5px;
 }
 
 .hero-text p {
@@ -757,8 +766,9 @@ footer::before {
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
     position: relative;
     z-index: 1;
 }
@@ -972,6 +982,8 @@ footer::before {
     position: absolute;
     background-color: var(--surface-color);
     min-width: 200px;
+    max-height: 400px;
+    overflow-y: auto;
     box-shadow: var(--shadow-lg);
     border-radius: 12px;
     z-index: 1;
@@ -1227,7 +1239,7 @@ select:focus {
 /* WhatsApp Floating Button */
 .whatsapp-float {
     position: fixed;
-    bottom: 30px;
+    bottom: 100px;
     right: 30px;
     width: 60px;
     height: 60px;
