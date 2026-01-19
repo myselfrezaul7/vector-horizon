@@ -202,24 +202,57 @@ button {
     background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* Navbar */
+/* Navbar - iOS 17.2 Glassmorphic Style */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.5rem 0;
-    transition: all 0.3s ease;
+    padding: 1.25rem 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar.scrolled {
-    background: var(--nav-bg);
-    /* Use variable for dark mode transparency */
-    backdrop-filter: blur(var(--blur));
-    border-bottom: 1px solid var(--glass-border);
-    padding: 1rem 0;
-    box-shadow: var(--shadow-sm);
+    /* iOS 17.2 Glassmorphic Background */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.78) 0%,
+            rgba(255, 255, 255, 0.72) 50%,
+            rgba(248, 250, 252, 0.68) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    /* Subtle top border glow */
+    border-top: 0.5px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    /* Multi-layer shadow for depth */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.03),
+        0 0 0 0.5px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+    padding: 0.875rem 0;
+}
+
+/* Dark mode glassmorphism */
+[data-theme="dark"] .navbar.scrolled {
+    background: linear-gradient(to bottom,
+            rgba(15, 23, 42, 0.82) 0%,
+            rgba(30, 41, 59, 0.78) 50%,
+            rgba(15, 23, 42, 0.75) 100%);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+
+    border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .navbar-content {
@@ -2169,4 +2202,197 @@ select:focus {
     .back-to-top {
         right: max(15px, env(safe-area-inset-right));
     }
+}
+
+/* =========================================
+   ENHANCED ROBUSTNESS STYLES
+   Additional improvements for mobile and dark mode
+   ========================================= */
+
+/* Dark Mode Form Input Enhancements */
+[data-theme="dark"] input,
+[data-theme="dark"] select {
+    background-color: #1E293B;
+    border-color: #475569;
+    color: #F8FAFC;
+}
+
+[data-theme="dark"] input::placeholder {
+    color: #94A3B8;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* Dark mode date input calendar icon fix */
+[data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* Dark mode select dropdown arrow */
+[data-theme="dark"] select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.5rem;
+}
+
+/* Light mode select styling */
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.5rem;
+}
+
+/* Better Floating Button Positioning - Prevent Overlap */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .back-to-top {
+        bottom: 90px;
+        right: 20px;
+    }
+}
+
+/* Enhanced Focus-Visible States for Accessibility */
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
+}
+
+.nav-links a:focus-visible,
+.dropdown-content a:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+}
+
+/* Enhanced Carousel Touch Support */
+.carousel-track {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 1rem;
+    overscroll-behavior-x: contain;
+}
+
+/* Modal Mobile Scroll Improvements */
+@media (max-width: 480px) {
+    .modal-content {
+        max-height: calc(100vh - 40px);
+        max-height: calc(100dvh - 40px);
+        /* Dynamic viewport height for mobile browsers */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .modal.show {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+}
+
+/* Smooth Scrolling with Fallback */
+@supports (scroll-behavior: smooth) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Better Loading State Visibility */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Spinner animation for loading states */
+@keyframes button-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-loading::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: button-spinner 0.75s linear infinite;
+    vertical-align: middle;
+}
+
+/* Form Validation States */
+input:invalid:not(:placeholder-shown),
+select:invalid:not(:placeholder-shown) {
+    border-color: var(--error);
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: var(--success);
+}
+
+/* Mobile Navigation Enhancement - Smooth Transitions */
+@media (max-width: 768px) {
+    .nav-links {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Touch Active States for Mobile */
+@media (hover: none) {
+    .btn-primary:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+
+    .service-card:active {
+        transform: scale(0.98);
+    }
+
+    .story-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Prevent Text Selection on Interactive Elements */
+.btn,
+.carousel-btn,
+.menu-toggle,
+.theme-toggle,
+.faq-question {
+    -webkit-user-select: none;
+    user-select: none;
 }

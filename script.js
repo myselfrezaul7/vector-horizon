@@ -534,14 +534,46 @@
 
         // Basic validation
         if (!name || !email || !phone || !date || !time || !educationLevel) {
-            alert('Please fill in all required fields.');
+            showFormError('Please fill in all required fields.');
+            return;
+        }
+
+        // Name validation (at least 2 words)
+        if (name.split(' ').filter(w => w.length > 0).length < 2) {
+            showFormError('Please enter your full name (first and last name).');
             return;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
+            showFormError('Please enter a valid email address.');
+            return;
+        }
+
+        // Phone validation (Bangladeshi and international formats)
+        const phoneClean = phone.replace(/[\s\-\(\)]/g, '');
+        const phoneRegex = /^(\+?880|0)?1[3-9]\d{8}$|^\+?[1-9]\d{6,14}$/;
+        if (!phoneRegex.test(phoneClean)) {
+            showFormError('Please enter a valid phone number (e.g., 01XXX-XXXXXX or +880...).');
+            return;
+        }
+
+        // Date validation - prevent past dates
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (selectedDate < today) {
+            showFormError('Please select a future date for your consultation.');
+            return;
+        }
+
+        // Prevent dates more than 3 months in advance
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 3);
+        if (selectedDate > maxDate) {
+            showFormError('Please select a date within the next 3 months.');
             return;
         }
 
@@ -559,44 +591,85 @@
             // Use original date string if parsing fails
         }
 
-        // Show loading state
+        // Show loading state with spinner
         const originalBtnText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
+        submitBtn.classList.add('btn-loading');
         submitBtn.disabled = true;
 
         // Prepare form data for Web3Forms
         const formData = new FormData(form);
         formData.set('name', name);
         formData.set('email', email);
-        formData.set('phone', phone);
+        formData.set('phone', phoneClean);
         formData.set('date', formattedDate);
         formData.set('time', time);
         formData.set('education_level', educationLevel);
         formData.set('topic', topic);
 
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
+        // Submit with retry logic
+        const submitWithRetry = async (retries = 1) => {
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
 
-            const result = await response.json();
+                if (!response.ok && retries > 0) {
+                    // Wait 2 seconds before retry
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    return submitWithRetry(retries - 1);
+                }
 
-            if (result.success) {
-                alert('🎉 Booking confirmed! We will contact you soon.');
-                closeModal(modal);
-                form.reset();
-            } else {
-                throw new Error(result.message || 'Submission failed');
+                const result = await response.json();
+
+                if (result.success) {
+                    showFormSuccess('🎉 Booking confirmed! We will contact you soon.');
+                    closeModal(modal);
+                    form.reset();
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (error) {
+                if (retries > 0) {
+                    // Retry on network errors
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    return submitWithRetry(retries - 1);
+                }
+                console.error('Form submission error:', error);
+                showFormError('Sorry, there was an error sending your booking. Please try again or contact us directly via WhatsApp.');
             }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            alert('Sorry, there was an error sending your booking. Please try again or contact us directly at info@nextepedu.com');
+        };
+
+        try {
+            await submitWithRetry(1);
         } finally {
             // Reset button state
             submitBtn.textContent = originalBtnText;
+            submitBtn.classList.remove('btn-loading');
             submitBtn.disabled = false;
         }
+    }
+
+    /**
+     * Show form error message (replaces alert for better UX)
+     * @param {string} message - Error message to display
+     */
+    function showFormError(message) {
+        // Use a nicer notification if available, fallback to alert
+        if (window.Notification && Notification.permission === 'granted') {
+            new Notification('Form Error', { body: message });
+        } else {
+            alert('⚠️ ' + message);
+        }
+    }
+
+    /**
+     * Show form success message
+     * @param {string} message - Success message to display
+     */
+    function showFormSuccess(message) {
+        alert(message);
     }
 
     // ==========================================
@@ -657,7 +730,43 @@
         safeAddListener(track, 'mouseenter', stopAutoScroll);
         safeAddListener(track, 'mouseleave', startAutoScroll);
         safeAddListener(track, 'touchstart', stopAutoScroll, { passive: true });
-        safeAddListener(track, 'touchend', startAutoScroll);
+        safeAddListener(track, 'touchend', () => {
+            // Delay restart to allow swipe completion
+            setTimeout(startAutoScroll, 1000);
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isSwiping = false;
+
+        safeAddListener(track, 'touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            isSwiping = true;
+        }, { passive: true });
+
+        safeAddListener(track, 'touchmove', (e) => {
+            if (!isSwiping) return;
+            touchEndX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        safeAddListener(track, 'touchend', () => {
+            if (!isSwiping) return;
+            isSwiping = false;
+
+            const swipeDistance = touchStartX - touchEndX;
+            const minSwipeDistance = 50; // Minimum swipe distance to trigger
+
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe left - go to next
+                    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                } else {
+                    // Swipe right - go to previous
+                    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            }
+        }, { passive: true });
     }
 
     // ==========================================
