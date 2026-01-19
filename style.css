@@ -268,6 +268,8 @@ button {
     font-weight: 700;
     font-size: 1.5rem;
     color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
     /* Adapts to dark mode */
 }
 
@@ -553,63 +555,39 @@ button {
     color: var(--text-secondary);
 }
 
-/* CTA - Premium Animated Section */
+/* CTA - Premium Glassmorphic Section */
 .cta {
     position: relative;
-    background: linear-gradient(135deg,
-            #0F172A 0%,
-            #1a2744 25%,
-            #1E293B 50%,
-            #1a2744 75%,
-            #0F172A 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    color: white;
+    background: var(--surface-color);
     padding: 6rem 0;
     overflow: hidden;
 }
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Floating orbs effect */
-.cta::before,
-.cta::after {
+/* Subtle gradient overlay */
+.cta::before {
     content: '';
     position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%,
+            rgba(212, 175, 55, 0.08) 0%,
+            transparent 70%);
     pointer-events: none;
 }
 
-.cta::before {
+/* Floating orbs effect */
+.cta::after {
+    content: '';
+    position: absolute;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.5) 0%, transparent 70%);
-    top: -100px;
-    left: -100px;
-    animation: floatOrb 8s ease-in-out infinite;
-}
-
-.cta::after {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
-    bottom: -100px;
-    right: -50px;
-    animation: floatOrb 10s ease-in-out infinite reverse;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    filter: blur(60px);
+    opacity: 0.6;
+    pointer-events: none;
+    animation: floatOrb 10s ease-in-out infinite;
 }
 
 @keyframes floatOrb {
@@ -619,12 +597,8 @@ button {
         transform: translate(0, 0) scale(1);
     }
 
-    33% {
-        transform: translate(30px, -20px) scale(1.1);
-    }
-
-    66% {
-        transform: translate(-20px, 20px) scale(0.95);
+    50% {
+        transform: translate(-30px, 20px) scale(1.1);
     }
 }
 
@@ -634,22 +608,22 @@ button {
     z-index: 1;
 }
 
-/* iOS-Style Glassmorphic Card */
+/* iOS-Style Glassmorphic Card - Light Theme */
 .cta-glass-card {
     position: relative;
     background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0.1) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(255, 255, 255, 0.75) 50%,
+            rgba(248, 250, 252, 0.85) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 24px;
     padding: 4rem 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     overflow: hidden;
     max-width: 700px;
     margin: 0 auto;
@@ -667,7 +641,7 @@ button {
             transparent 70%,
             rgba(212, 175, 55, 0.4) 100%);
     z-index: -1;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 /* Animated shine sweep */
@@ -680,7 +654,7 @@ button {
     height: 100%;
     background: linear-gradient(90deg,
             transparent 0%,
-            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.4) 50%,
             transparent 100%);
     animation: shimmer 8s ease-in-out infinite;
 }
@@ -704,14 +678,13 @@ button {
 }
 
 .cta h2 {
-    color: white;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     font-size: 2.75rem;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cta p {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-secondary);
     margin-bottom: 2.5rem;
     font-size: 1.15rem;
     max-width: 600px;
@@ -730,8 +703,8 @@ button {
     font-size: 1.1rem;
     border: none;
     box-shadow:
-        0 4px 15px rgba(212, 175, 55, 0.4),
-        0 0 30px rgba(212, 175, 55, 0.2),
+        0 4px 15px rgba(212, 175, 55, 0.3),
+        0 0 20px rgba(212, 175, 55, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
@@ -755,8 +728,8 @@ button {
     transform: translateY(-3px) scale(1.05);
     background-position: 100% 50%;
     box-shadow:
-        0 8px 25px rgba(212, 175, 55, 0.5),
-        0 0 50px rgba(212, 175, 55, 0.3),
+        0 8px 25px rgba(212, 175, 55, 0.4),
+        0 0 40px rgba(212, 175, 55, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -764,22 +737,30 @@ button {
     left: 100%;
 }
 
-/* Footer - iOS 17.2 Glassmorphic Style */
+/* Dark Mode CTA */
+[data-theme="dark"] .cta {
+    background: var(--surface-color);
+}
+
+[data-theme="dark"] .cta-glass-card {
+    background: linear-gradient(135deg,
+            rgba(30, 41, 59, 0.9) 0%,
+            rgba(30, 41, 59, 0.85) 50%,
+            rgba(15, 23, 42, 0.9) 100%);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Footer - Light Glassmorphic Style matching theme */
 footer {
     position: relative;
-    background: linear-gradient(135deg,
-            rgba(15, 23, 42, 0.85) 0%,
-            rgba(30, 41, 59, 0.75) 50%,
-            rgba(15, 23, 42, 0.85) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    color: rgba(255, 255, 255, 0.8);
+    background: var(--surface-color);
+    color: var(--text-primary);
     padding: 2.5rem 0;
     font-size: 0.9rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow:
-        0 -10px 40px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
     overflow: hidden;
 }
 
@@ -792,7 +773,7 @@ footer::before {
     right: 0;
     bottom: 0;
     background: radial-gradient(ellipse at 50% 0%,
-            rgba(212, 175, 55, 0.08) 0%,
+            rgba(212, 175, 55, 0.06) 0%,
             transparent 60%);
     pointer-events: none;
 }
@@ -807,7 +788,7 @@ footer::before {
 }
 
 .footer-info p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     font-weight: 400;
     letter-spacing: 0.3px;
 }
@@ -819,7 +800,7 @@ footer::before {
 
 .social-links a {
     position: relative;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
@@ -827,20 +808,18 @@ footer::before {
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .social-links a:hover {
-    color: #fff;
+    color: var(--accent-color);
     transform: translateY(-3px) scale(1.1);
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(212, 175, 55, 0.15);
     border-color: rgba(212, 175, 55, 0.4);
     box-shadow:
-        0 0 20px rgba(212, 175, 55, 0.4),
-        0 0 40px rgba(212, 175, 55, 0.2),
-        0 0 60px rgba(212, 175, 55, 0.1),
-        inset 0 0 20px rgba(212, 175, 55, 0.1);
+        0 4px 15px rgba(212, 175, 55, 0.2),
+        0 0 20px rgba(212, 175, 55, 0.1);
 }
 
 .social-links a::after {
@@ -850,7 +829,7 @@ footer::before {
     border-radius: 14px;
     background: linear-gradient(135deg,
             rgba(212, 175, 55, 0) 0%,
-            rgba(212, 175, 55, 0.3) 50%,
+            rgba(212, 175, 55, 0.2) 50%,
             rgba(212, 175, 55, 0) 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -876,17 +855,17 @@ footer::before {
     }
 }
 
-/* FAQ Section Styles */
+/* FAQ Section Styles - Light Theme */
 .footer-faq {
     padding: 2rem 0 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     margin-bottom: 2rem;
 }
 
 .faq-title {
     text-align: center;
     font-size: 1.75rem;
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--text-primary);
     margin-bottom: 2rem;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -901,16 +880,16 @@ footer::before {
 }
 
 .faq-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.12);
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .faq-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(212, 175, 55, 0.25);
 }
 
 .faq-question {
@@ -918,7 +897,7 @@ footer::before {
     padding: 1.25rem 1.5rem;
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary);
     font-size: 0.95rem;
     font-weight: 500;
     text-align: left;
@@ -963,10 +942,35 @@ footer::before {
 
 .faq-answer p {
     padding: 0 1.5rem 1.25rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;
+}
+
+/* Dark Mode Footer */
+[data-theme="dark"] footer {
+    background: var(--surface-color);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .footer-faq {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .faq-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .faq-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+[data-theme="dark"] .social-links a {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive FAQ */
