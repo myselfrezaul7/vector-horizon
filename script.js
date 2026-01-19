@@ -242,6 +242,8 @@
     function initMobileMenu() {
         const menuToggle = safeQuery('.menu-toggle');
         const navLinks = safeQuery('.nav-links');
+        const dropdown = safeQuery('.dropdown');
+        const dropbtn = safeQuery('.dropbtn');
 
         if (!menuToggle || !navLinks) return;
 
@@ -253,11 +255,38 @@
             menuToggle.setAttribute('aria-expanded', isExpanded);
         });
 
+        // Mobile dropdown toggle
+        if (dropbtn && dropdown) {
+            safeAddListener(dropbtn, 'click', (e) => {
+                // Only handle on mobile (when menu toggle is visible)
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropdown.classList.toggle('active');
+
+                    // Rotate the chevron icon
+                    const icon = safeQuery('i', dropbtn);
+                    if (icon) {
+                        icon.style.transform = dropdown.classList.contains('active')
+                            ? 'rotate(180deg)'
+                            : 'rotate(0deg)';
+                    }
+                }
+            });
+        }
+
         // Close menu when clicking outside
         safeAddListener(document, 'click', (e) => {
             if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            // Close dropdown if clicking outside of it
+            if (dropdown && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+                const icon = safeQuery('i', dropbtn);
+                if (icon) icon.style.transform = 'rotate(0deg)';
             }
         });
 
@@ -267,6 +296,13 @@
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
                 menuToggle.focus();
+
+                // Also close dropdown
+                if (dropdown) {
+                    dropdown.classList.remove('active');
+                    const icon = safeQuery('i', dropbtn);
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
             }
         });
     }
@@ -555,7 +591,7 @@
             }
         } catch (error) {
             console.error('Form submission error:', error);
-            alert('Sorry, there was an error sending your booking. Please try again or contact us directly at edunextep@gmail.com');
+            alert('Sorry, there was an error sending your booking. Please try again or contact us directly at info@nextepedu.com');
         } finally {
             // Reset button state
             submitBtn.textContent = originalBtnText;
@@ -625,6 +661,41 @@
     }
 
     // ==========================================
+    // FAQ Accordion
+    // ==========================================
+
+    function initFAQ() {
+        const faqItems = safeQueryAll('.faq-item');
+
+        if (faqItems.length === 0) return;
+
+        faqItems.forEach(item => {
+            const question = safeQuery('.faq-question', item);
+
+            if (question) {
+                safeAddListener(question, 'click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other FAQ items (optional: remove this for multiple open)
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            const otherQuestion = safeQuery('.faq-question', otherItem);
+                            if (otherQuestion) {
+                                otherQuestion.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    });
+
+                    // Toggle current item
+                    item.classList.toggle('active');
+                    question.setAttribute('aria-expanded', !isActive);
+                });
+            }
+        });
+    }
+
+    // ==========================================
     // Initialize Everything
     // ==========================================
 
@@ -638,6 +709,7 @@
             initPreloader();
             initBookingModal();
             initCarousel();
+            initFAQ();
 
             // Initialize Lucide icons
             if (typeof lucide !== 'undefined' && lucide.createIcons) {
