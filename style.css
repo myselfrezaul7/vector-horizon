@@ -1180,12 +1180,14 @@ footer::before {
 @media (max-width: 768px) {
     .dropdown {
         width: 100%;
+        text-align: center;
     }
 
     .dropbtn {
         width: 100%;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0.5rem 0;
+        gap: 0.5rem;
     }
 
     .dropbtn i {
@@ -1214,6 +1216,7 @@ footer::before {
     .dropdown-content a {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+        text-align: center;
     }
 
     /* Disable hover on mobile */
