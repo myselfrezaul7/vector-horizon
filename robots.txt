@@ -1,5 +1,48 @@
+# NexTep Edu - Robots.txt
+# https://nextepedu.com
+
+# Allow all search engine crawlers
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing-specific directives
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow crawling of assets and system files that don't need indexing
+User-agent: *
+Disallow: /.git/
+Disallow: /.gemini/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.js.map$
+
+# Allow important resources for page rendering
+Allow: /style.css
+Allow: /script.js
+Allow: /security.js
+Allow: /cookies.js
+Allow: /assets/
+Allow: /destinations/
+
+# Sitemap location (required for Google Search Console)
 Sitemap: https://nextepedu.com/sitemap.xml
+
+# Additional guidelines for specific bots
+# Allow Google to access all images
+User-agent: Googlebot-Image
+Allow: /assets/
+
+# Allow Google Mobile to access all content
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Clean param handling - prevent duplicate content
+# Google ignores this but other bots may use it
+Host: https://nextepedu.com

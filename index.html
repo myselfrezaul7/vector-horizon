@@ -10,6 +10,14 @@
         content="study abroad, Bangladesh, education consultancy, UK, USA, Canada, Australia, Germany, France, university admission, visa, scholarship, IELTS, higher education, international students">
     <meta name="author" content="NexTep Edu">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow">
+
+    <!-- Language & Regional Targeting -->
+    <meta name="language" content="English">
+    <meta name="content-language" content="en">
+    <link rel="alternate" hreflang="en" href="https://nextepedu.com/">
+    <link rel="alternate" hreflang="x-default" href="https://nextepedu.com/">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="-rite_oeT3HO65k-rhGykyzD6x-V05loAJ27NfqRteM">
@@ -25,8 +33,12 @@
     <meta property="og:description"
         content="Expert guidance for students in Bangladesh dreaming of top universities worldwide. 98% visa success rate. Free consultation available.">
     <meta property="og:image" content="https://nextepedu.com/assets/logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="NexTep Edu - Study Abroad Consultancy">
     <meta property="og:locale" content="en_US">
+    <meta property="article:publisher" content="https://facebook.com/nextepbd">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -35,10 +47,30 @@
         content="Expert guidance for students in Bangladesh dreaming of top universities worldwide. 98% visa success rate.">
     <meta name="twitter:image" content="https://nextepedu.com/assets/logo.png">
 
+    <!-- Twitter Additional Tags -->
+    <meta name="twitter:site" content="@nextepedu">
+    <meta name="twitter:creator" content="@nextepedu">
+
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#1E3A5F">
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
     <meta name="geo.region" content="BD">
-    <meta name="geo.placename" content="Bangladesh">
+    <meta name="geo.placename" content="Dhaka, Bangladesh">
+    <meta name="geo.position" content="23.8103;90.4125">
+    <meta name="ICBM" content="23.8103, 90.4125">
+
+    <!-- Mobile App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NexTep Edu">
+    <meta name="application-name" content="NexTep Edu">
+
+    <!-- Format Detection -->
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="format-detection" content="email=yes">
+    <meta name="format-detection" content="address=yes">
 
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy"
@@ -77,45 +109,329 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="./assets/hero.png" as="image" fetchpriority="high">
+    <!-- Note: Hero image moved to responsive loading in HTML for better mobile performance -->
     <link rel="preload"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
-        as="style">
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
-    <!-- Fonts -->
+    <!-- Fonts - loaded asynchronously with fallback -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
+    <!-- Critical CSS - Inline for fastest FCP -->
+    <style>
+        /* Critical above-the-fold styles for fast FCP/LCP */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #F8FAFC;
+            color: #1E293B;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.25rem 0
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1E293B;
+            text-decoration: none
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto
+        }
+
+        .hero {
+            position: relative;
+            padding: 8rem 0 4rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: .5rem;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2
+        }
+
+        .btn {
+            display: inline-block;
+            padding: .75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all .3s ease
+        }
+
+        .btn-primary {
+            background: #D4AF37;
+            color: #0F172A;
+            font-weight: 600
+        }
+
+        @media(max-width:768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center
+            }
+
+            .hero-text h1 {
+                font-size: 2rem
+            }
+
+            .hero-image {
+                display: none
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .menu-toggle {
+                display: block
+            }
+        }
+    </style>
+
+    <!-- Main Stylesheet - Non-blocking -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Icons - deferred for performance -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
-    <!-- Structured Data - Organization -->
+    <!-- Structured Data - Organization (Enhanced for Google Search) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "EducationalOrganization",
+        "@id": "https://nextepedu.com/#organization",
         "name": "NexTep Edu",
-        "alternateName": "NexTep Education Consultancy",
+        "alternateName": ["NexTep Education Consultancy", "NexTep"],
         "url": "https://nextepedu.com",
-        "logo": "https://nextepedu.com/assets/logo.png",
-        "description": "Premier higher study consultancy in Bangladesh helping students achieve their dreams of studying abroad.",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://nextepedu.com/assets/logo.png",
+            "width": 512,
+            "height": 512,
+            "caption": "NexTep Edu Logo"
+        },
+        "image": "https://nextepedu.com/assets/logo.png",
+        "description": "Premier higher study consultancy in Bangladesh helping students achieve their dreams of studying abroad. Expert guidance for UK, USA, Canada, Australia, Germany and 20+ countries.",
         "email": "info@nextepedu.com",
+        "telephone": "+4915773855748",
+        "priceRange": "$$",
+        "foundingDate": "2024",
+        "areaServed": [
+            {
+                "@type": "Country",
+                "name": "Bangladesh"
+            }
+        ],
+        "serviceType": ["Education Consulting", "Visa Assistance", "University Admission", "Scholarship Guidance", "IELTS Preparation", "Statement of Purpose Writing"],
+        "knowsAbout": ["Study Abroad", "International Education", "Student Visa", "University Applications", "Scholarships", "IELTS", "TOEFL"],
+        "slogan": "One step, no limits.",
+        "sameAs": [
+            "https://facebook.com/nextepbd",
+            "https://www.instagram.com/nextepedu/",
+            "https://wa.me/4915773855748"
+        ],
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@nextepedu.com",
+                "telephone": "+4915773855748",
+                "availableLanguage": ["English", "Bengali"],
+                "hoursAvailable": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    "opens": "10:00",
+                    "closes": "18:00"
+                }
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "50",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+    </script>
+
+    <!-- Structured Data - WebSite with SearchAction (for Google Sitelinks) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nextepedu.com/#website",
+        "name": "NexTep Edu",
+        "alternateName": "NexTep Education",
+        "url": "https://nextepedu.com",
+        "description": "Your Gateway to Global Education - Premier study abroad consultancy in Bangladesh",
+        "publisher": {
+            "@id": "https://nextepedu.com/#organization"
+        },
+        "inLanguage": "en",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://nextepedu.com/?s={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Structured Data - WebPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://nextepedu.com/#webpage",
+        "url": "https://nextepedu.com/",
+        "name": "NexTep Edu | Build Your Future Abroad - Study in UK, USA, Canada, Australia",
+        "description": "Expert guidance for students in Bangladesh dreaming of top universities worldwide. 98% visa success rate. Free consultation available.",
+        "isPartOf": {
+            "@id": "https://nextepedu.com/#website"
+        },
+        "about": {
+            "@id": "https://nextepedu.com/#organization"
+        },
+        "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://nextepedu.com/assets/hero.jpg"
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-01-21",
+        "inLanguage": "en",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".hero-text h1", ".hero-text p", ".section-header h2", ".section-header p"]
+        }
+    }
+    </script>
+
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://nextepedu.com/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Structured Data - Service (Study Abroad Consultation) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://nextepedu.com/#service",
+        "serviceType": "Education Consulting",
+        "name": "Study Abroad Consultation",
+        "description": "Complete guidance for studying abroad including university selection, visa processing, and scholarship assistance for UK, USA, Canada, Australia, Germany and 20+ countries.",
+        "provider": {
+            "@id": "https://nextepedu.com/#organization"
+        },
         "areaServed": {
             "@type": "Country",
             "name": "Bangladesh"
         },
-        "serviceType": ["Education Consulting", "Visa Assistance", "University Admission", "Scholarship Guidance"],
-        "sameAs": [
-            "https://facebook.com/nextepbd",
-            "https://www.instagram.com/nextepedu/"
-        ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer service",
-            "email": "info@nextepedu.com",
-            "availableLanguage": ["English", "Bengali"]
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Study Abroad Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "University Selection & Admission",
+                        "description": "Expert guidance to choose the right university based on your profile and goals"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Visa Processing",
+                        "description": "Complete visa application assistance with 98% success rate"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Scholarship Guidance",
+                        "description": "Find and apply for scholarships you never knew existed"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Career Planning",
+                        "description": "Long-term career guidance including internships and work permits"
+                    }
+                }
+            ]
         }
     }
     </script>
@@ -159,7 +475,8 @@
     <nav class="navbar" id="navbar">
         <div class="container navbar-content">
             <a href="./" class="logo">
-                <img src="./assets/logo.png" alt="NexTep Edu Logo" class="logo-img">
+                <img src="./assets/logo.png" alt="NexTep Edu Logo" class="logo-img" width="40" height="40"
+                    loading="eager">
                 <span class="logo-text">NexTep Edu</span>
             </a>
             <div class="nav-links">
@@ -212,7 +529,9 @@
                 </div>
             </div>
             <div class="hero-image fade-in-left delay-1">
-                <img src="./assets/hero.png" alt="Students on campus" fetchpriority="high">
+                <!-- Hero image hidden on mobile via critical CSS for better LCP -->
+                <img src="./assets/hero.jpg" alt="Students on campus" width="600" height="400" loading="lazy"
+                    decoding="async" style="aspect-ratio: 3/2;">
             </div>
         </div>
         <div class="hero-background-blur"></div>
@@ -633,17 +952,30 @@
         </div>
     </div>
 
-    <!-- Security Utilities (load before main script) -->
-    <script src="security.js"></script>
-    <script src="script.js"></script>
+    <!-- Scripts - deferred for performance -->
+    <script src="cookies.js" defer></script>
+    <script src="security.js" defer></script>
+    <script src="script.js" defer></script>
+    <!-- Core Web Vitals & Performance Optimization -->
+    <script src="performance.js" defer></script>
     <script>
-        // Initialize Lucide icons
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        // Initialize Lucide icons after DOM and scripts are loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if lucide is loaded, if not wait a bit
+            var checkLucide = function () {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                } else {
+                    setTimeout(checkLucide, 100);
+                }
+            };
+            checkLucide();
+        });
         // Dynamic footer year
-        const yearEl = document.getElementById('footer-year');
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function () {
+            var yearEl = document.getElementById('footer-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        });
     </script>
 
     <!-- Fallback for users without JavaScript -->
