@@ -1,0 +1,27 @@
+{
+    "name": "NexTep Edu",
+    "short_name": "NexTep",
+    "description": "Your Gateway to Global Education - Premier higher study consultancy in Bangladesh",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#F8FAFC",
+    "theme_color": "#1E3A5F",
+    "icons": [
+        {
+            "src": "./assets/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

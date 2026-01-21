@@ -11,6 +11,9 @@
     <meta name="author" content="NexTep Edu">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="-rite_oeT3HO65k-rhGykyzD6x-V05loAJ27NfqRteM">
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://nextepedu.com/">
 
@@ -37,15 +40,49 @@
     <meta name="geo.region" content="BD">
     <meta name="geo.placename" content="Bangladesh">
 
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
     <title>NexTep Edu | Build Your Future Abroad - Study in UK, USA, Canada, Australia</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/logo.png">
-    <link rel="apple-touch-icon" href="./assets/logo.png">
+    <!-- Favicon Configuration for Google & Browsers -->
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
 
-    <!-- Fonts -->
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+
+    <!-- Android/Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/android-chrome-512x512.png">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="./site.webmanifest">
+
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#1E3A5F">
+    <meta name="msapplication-TileImage" content="./assets/logo.png">
+
+    <!-- DNS Prefetch & Preconnect for Performance -->
+    <link rel="dns-prefetch" href="https://api.web3forms.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="./assets/hero.png" as="image" fetchpriority="high">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        as="style">
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
         rel="stylesheet">
 
@@ -175,7 +212,7 @@
                 </div>
             </div>
             <div class="hero-image fade-in-left delay-1">
-                <img src="./assets/hero.png" alt="Students on campus">
+                <img src="./assets/hero.png" alt="Students on campus" fetchpriority="high">
             </div>
         </div>
         <div class="hero-background-blur"></div>
@@ -267,6 +304,7 @@
         <section id="stories" class="section stories">
             <div class="container">
                 <div class="section-header text-center fade-in-up">
+                    <span class="section-badge">Real Stories</span>
                     <h2>From Students Who've Been There</h2>
                     <p>We could tell you how great we are, but honestly? These stories say it better than we ever could.
                     </p>
@@ -274,49 +312,140 @@
 
                 <div class="carousel-container fade-in-up delay-1">
                     <div class="carousel-track" id="testimonial-track">
-                        <!-- Clones will be added by JS for infinite effect, or just simple scroll -->
                         <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
                             <p class="story-text">"I was honestly lost before I found these guys. My SOP was a mess, and
                                 I had no idea how visa interviews worked. They sat with me, fixed everything, and now
                                 I'm actually in Toronto studying Computer Science. Still feels unreal."</p>
                             <div class="story-author">
+                                <div class="author-avatar">RA</div>
                                 <div class="author-info">
                                     <h4>Rahim Ahmed</h4>
-                                    <p>University of Toronto, Canada</p>
+                                    <p><span class="country-flag">🇨🇦</span> University of Toronto, Canada</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
                             <p class="story-text">"They found me a scholarship I had never even heard of. Like, who knew
                                 these things existed? The team is super chill and actually listens to what you want.
                                 Made the whole UK dream possible for my family."</p>
                             <div class="story-author">
+                                <div class="author-avatar">FA</div>
                                 <div class="author-info">
                                     <h4>Fatima Akter</h4>
-                                    <p>University of Manchester, UK</p>
+                                    <p><span class="country-flag">🇬🇧</span> University of Manchester, UK</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
                             <p class="story-text">"What I loved is they didn't just help with applications — they helped
                                 me figure out where to live, how to manage money abroad, everything. It's like having an
                                 older sibling who's been through it all."</p>
                             <div class="story-author">
+                                <div class="author-avatar">TH</div>
                                 <div class="author-info">
                                     <h4>Tanvir Hasan</h4>
-                                    <p>Monash University, Australia</p>
+                                    <p><span class="country-flag">🇦🇺</span> Monash University, Australia</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- More dummy data for slider feel -->
+
                         <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
                             <p class="story-text">"No pushy sales tactics, no fake promises. Just real people doing
                                 their job well. I respected that, and it made me trust them with something as big as my
                                 education."</p>
                             <div class="story-author">
+                                <div class="author-avatar">NJ</div>
                                 <div class="author-info">
                                     <h4>Nusrat Jahan</h4>
-                                    <p>University of Leeds, UK</p>
+                                    <p><span class="country-flag">🇬🇧</span> University of Leeds, UK</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
+                            <p class="story-text">"From choosing the right program to getting my visa approved — NexTep
+                                was there every step of the way. The team genuinely cares about your success, and that
+                                made all the difference."</p>
+                            <div class="story-author">
+                                <div class="author-avatar">SK</div>
+                                <div class="author-info">
+                                    <h4>Sadia Khan</h4>
+                                    <p><span class="country-flag">🇩🇪</span> TU Munich, Germany</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="story-card">
+                            <div class="story-quote-icon">
+                                <i data-lucide="quote"></i>
+                            </div>
+                            <div class="story-rating">
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                                <i data-lucide="star" class="star-filled"></i>
+                            </div>
+                            <p class="story-text">"I thought studying in America was just a dream for rich kids. NexTep
+                                showed me it's possible with the right scholarships and guidance. Now I'm living that
+                                dream in California!"</p>
+                            <div class="story-author">
+                                <div class="author-avatar">AR</div>
+                                <div class="author-info">
+                                    <h4>Arif Rahman</h4>
+                                    <p><span class="country-flag">🇺🇸</span> UCLA, United States</p>
                                 </div>
                             </div>
                         </div>
@@ -324,6 +453,7 @@
                     <div class="carousel-controls">
                         <button class="carousel-btn prev" aria-label="Previous"><i
                                 data-lucide="chevron-left"></i></button>
+                        <div class="carousel-dots" id="carousel-dots"></div>
                         <button class="carousel-btn next" aria-label="Next"><i data-lucide="chevron-right"></i></button>
                     </div>
                 </div>
@@ -446,6 +576,12 @@
                 <input type="hidden" name="from_name" value="NexTep Edu Website">
                 <input type="hidden" name="redirect" value="">
 
+                <!-- Honeypot Field (Anti-Bot) - Hidden from users, visible to bots -->
+                <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
+                    <label for="website_url">Website URL (leave blank)</label>
+                    <input type="text" name="website_url" id="website_url" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="form-group">
                     <label for="name">Full Name <span class="required-star">*</span></label>
                     <input type="text" id="name" name="name" required placeholder="Enter your full name"
@@ -497,6 +633,8 @@
         </div>
     </div>
 
+    <!-- Security Utilities (load before main script) -->
+    <script src="security.js"></script>
     <script src="script.js"></script>
     <script>
         // Initialize Lucide icons

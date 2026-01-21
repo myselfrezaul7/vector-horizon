@@ -474,6 +474,11 @@
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
 
+        // Record form open time for security (bot detection)
+        if (window.NexTepSecurity) {
+            window.NexTepSecurity.recordFormOpen();
+        }
+
         // Focus first input for accessibility
         const firstInput = safeQuery('input', modal);
         if (firstInput) {
@@ -531,6 +536,28 @@
         const time = getValue('time');
         const educationLevel = getValue('education-level');
         const topic = getValue('topic');
+
+        // ==========================================
+        // Security Checks (if security module loaded)
+        // ==========================================
+        if (window.NexTepSecurity) {
+            const formData = { name, email, phone, date, time, educationLevel, topic };
+            const securityCheck = window.NexTepSecurity.performSecurityChecks(form, formData);
+
+            if (!securityCheck.passed) {
+                if (securityCheck.isBot) {
+                    // Silent failure for bots - pretend success
+                    showFormSuccess('🎉 Booking confirmed! We will contact you soon.');
+                    closeModal(modal);
+                    form.reset();
+                    return;
+                }
+                if (securityCheck.error) {
+                    showFormError(securityCheck.error);
+                }
+                return;
+            }
+        }
 
         // Basic validation
         if (!name || !email || !phone || !date || !time || !educationLevel) {
@@ -591,6 +618,10 @@
             // Use original date string if parsing fails
         }
 
+        // Sanitize inputs if security module available
+        const sanitizedName = window.NexTepSecurity ? window.NexTepSecurity.sanitizeInput(name) : name;
+        const sanitizedEmail = window.NexTepSecurity ? window.NexTepSecurity.sanitizeInput(email) : email;
+
         // Show loading state with spinner
         const originalBtnText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
@@ -598,21 +629,24 @@
         submitBtn.disabled = true;
 
         // Prepare form data for Web3Forms
-        const formData = new FormData(form);
-        formData.set('name', name);
-        formData.set('email', email);
-        formData.set('phone', phoneClean);
-        formData.set('date', formattedDate);
-        formData.set('time', time);
-        formData.set('education_level', educationLevel);
-        formData.set('topic', topic);
+        const formDataObj = new FormData(form);
+        formDataObj.set('name', sanitizedName);
+        formDataObj.set('email', sanitizedEmail);
+        formDataObj.set('phone', phoneClean);
+        formDataObj.set('date', formattedDate);
+        formDataObj.set('time', time);
+        formDataObj.set('education_level', educationLevel);
+        formDataObj.set('topic', topic);
+
+        // Remove honeypot field from submission
+        formDataObj.delete('website_url');
 
         // Submit with retry logic
         const submitWithRetry = async (retries = 1) => {
             try {
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    body: formData
+                    body: formDataObj
                 });
 
                 if (!response.ok && retries > 0) {
@@ -624,6 +658,10 @@
                 const result = await response.json();
 
                 if (result.success) {
+                    // Record submission for rate limiting
+                    if (window.NexTepSecurity) {
+                        window.NexTepSecurity.addSubmission();
+                    }
                     showFormSuccess('🎉 Booking confirmed! We will contact you soon.');
                     closeModal(modal);
                     form.reset();
