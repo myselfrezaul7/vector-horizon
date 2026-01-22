@@ -52,6 +52,21 @@
         initScrollEffects();
         initMobileMenu();
         initAnimations();
+        initUniversityAccordion();
+    }
+
+    // ==========================================
+    // University Accordion
+    // ==========================================
+
+    function initUniversityAccordion() {
+        const headers = safeQueryAll('.university-header');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
     }
 
     // ==========================================
