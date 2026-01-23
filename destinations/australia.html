@@ -25,7 +25,8 @@
     <meta name="twitter:image" content="https://nextepedu.com/assets/logo.png">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -142,18 +143,216 @@
                     <h2>Universities We Work With</h2>
                     <p>The Group of Eight and beyond — we've got connections all over Australia.</p>
                 </div>
-                <ul class="feature-list fade-in-up delay-1"
-                    style="justify-content: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <li><i data-lucide="check-circle"></i> University of Melbourne</li>
-                    <li><i data-lucide="check-circle"></i> University of Sydney</li>
-                    <li><i data-lucide="check-circle"></i> UNSW Sydney</li>
-                    <li><i data-lucide="check-circle"></i> Australian National University</li>
-                    <li><i data-lucide="check-circle"></i> Monash University</li>
-                    <li><i data-lucide="check-circle"></i> University of Queensland</li>
-                    <li><i data-lucide="check-circle"></i> University of Western Australia</li>
-                    <li><i data-lucide="check-circle"></i> University of Adelaide</li>
-                    <li><i data-lucide="check-circle"></i> RMIT University</li>
-                    <li><i data-lucide="check-circle"></i> Macquarie University</li>
+                <ul class="university-list fade-in-up delay-1">
+                    <!-- University of Melbourne -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Melbourne</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="University of Melbourne Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="University of Melbourne Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Sydney -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Sydney</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="University of Sydney Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="University of Sydney Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- UNSW Sydney -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> UNSW Sydney</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="UNSW Sydney Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="UNSW Sydney Atmosphere" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Australian National University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Australian National
+                                University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="Australian National University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png"
+                                        alt="Australian National University Atmosphere" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Monash University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Monash University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="Monash University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="Monash University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Queensland -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Queensland</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="University of Queensland Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="University of Queensland Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Western Australia -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Western
+                                Australia</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="University of Western Australia Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png"
+                                        alt="University of Western Australia Atmosphere" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Adelaide -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Adelaide</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="University of Adelaide Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="University of Adelaide Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- RMIT University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> RMIT University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="RMIT University Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="RMIT University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Macquarie University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Macquarie University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/australia-uni.png" alt="Macquarie University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/australia-atm.png" alt="Macquarie University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -259,5 +458,3 @@
 </body>
 
 </html>
-
-

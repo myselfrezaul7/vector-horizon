@@ -25,7 +25,8 @@
     <meta name="twitter:image" content="https://nextepedu.com/assets/logo.png">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -142,18 +143,214 @@
                     <h2>Universities We Work With</h2>
                     <p>From coast to coast, Canada's got options.</p>
                 </div>
-                <ul class="feature-list fade-in-up delay-1"
-                    style="justify-content: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <li><i data-lucide="check-circle"></i> University of Toronto</li>
-                    <li><i data-lucide="check-circle"></i> University of British Columbia</li>
-                    <li><i data-lucide="check-circle"></i> McGill University</li>
-                    <li><i data-lucide="check-circle"></i> University of Alberta</li>
-                    <li><i data-lucide="check-circle"></i> McMaster University</li>
-                    <li><i data-lucide="check-circle"></i> University of Waterloo</li>
-                    <li><i data-lucide="check-circle"></i> Western University</li>
-                    <li><i data-lucide="check-circle"></i> Queen's University</li>
-                    <li><i data-lucide="check-circle"></i> Simon Fraser University</li>
-                    <li><i data-lucide="check-circle"></i> University of Calgary</li>
+                <ul class="university-list fade-in-up delay-1">
+                    <!-- University of Toronto -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Toronto</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="University of Toronto Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="University of Toronto Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of British Columbia -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of British
+                                Columbia</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="University of British Columbia Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="University of British Columbia Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- McGill University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> McGill University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="McGill University Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="McGill University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Alberta -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Alberta</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="University of Alberta Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="University of Alberta Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- McMaster University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> McMaster University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="McMaster University Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="McMaster University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Waterloo -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Waterloo</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="University of Waterloo Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="University of Waterloo Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Western University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Western University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="Western University Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="Western University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Queen's University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Queen's University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="Queen's University Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="Queen's University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Simon Fraser University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Simon Fraser University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="Simon Fraser University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="Simon Fraser University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Calgary -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Calgary</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/canada-uni.png" alt="University of Calgary Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/canada-atm.png" alt="University of Calgary Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -258,5 +455,3 @@
 </body>
 
 </html>
-
-

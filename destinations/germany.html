@@ -25,7 +25,8 @@
     <meta name="twitter:image" content="https://nextepedu.com/assets/logo.png">
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -161,18 +162,217 @@
                     <h2>Universities We Work With</h2>
                     <p>From TUM to Heidelberg — the best of German academia.</p>
                 </div>
-                <ul class="feature-list fade-in-up delay-1"
-                    style="justify-content: center; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <li><i data-lucide="check-circle"></i> Technical University of Munich</li>
-                    <li><i data-lucide="check-circle"></i> LMU Munich</li>
-                    <li><i data-lucide="check-circle"></i> Heidelberg University</li>
-                    <li><i data-lucide="check-circle"></i> Humboldt University of Berlin</li>
-                    <li><i data-lucide="check-circle"></i> Free University of Berlin</li>
-                    <li><i data-lucide="check-circle"></i> RWTH Aachen University</li>
-                    <li><i data-lucide="check-circle"></i> University of Freiburg</li>
-                    <li><i data-lucide="check-circle"></i> University of Göttingen</li>
-                    <li><i data-lucide="check-circle"></i> Technical University of Berlin</li>
-                    <li><i data-lucide="check-circle"></i> University of Bonn</li>
+                <ul class="university-list fade-in-up delay-1">
+                    <!-- Technical University of Munich -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Technical University of
+                                Munich</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="Technical University of Munich Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="Technical University of Munich Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- LMU Munich -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> LMU Munich</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="LMU Munich Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="LMU Munich Atmosphere" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Heidelberg University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Heidelberg University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="Heidelberg University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="Heidelberg University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Humboldt University of Berlin -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Humboldt University of
+                                Berlin</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="Humboldt University of Berlin Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="Humboldt University of Berlin Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Free University of Berlin -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Free University of Berlin</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="Free University of Berlin Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="Free University of Berlin Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- RWTH Aachen University -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> RWTH Aachen University</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="RWTH Aachen University Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="RWTH Aachen University Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Freiburg -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Freiburg</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="University of Freiburg Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="University of Freiburg Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Göttingen -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Göttingen</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="University of Göttingen Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="University of Göttingen Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Technical University of Berlin -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> Technical University of
+                                Berlin</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="Technical University of Berlin Campus"
+                                        loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="Technical University of Berlin Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- University of Bonn -->
+                    <li class="university-item">
+                        <div class="university-header">
+                            <span class="uni-name"><i data-lucide="check-circle"></i> University of Bonn</span>
+                            <i data-lucide="chevron-down" class="uni-toggle-icon"></i>
+                        </div>
+                        <div class="university-details">
+                            <div class="detail-content">
+                                <div class="detail-image-group">
+                                    <span>Campus</span>
+                                    <img src="../assets/germany-uni.png" alt="University of Bonn Campus" loading="lazy">
+                                </div>
+                                <div class="detail-image-group">
+                                    <span>Atmosphere</span>
+                                    <img src="../assets/germany-atm.png" alt="University of Bonn Atmosphere"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -285,5 +485,3 @@
 </body>
 
 </html>
-
-
