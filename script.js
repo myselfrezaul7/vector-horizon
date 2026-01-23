@@ -181,43 +181,39 @@
         const scrollProgress = safeGetById('scroll-progress');
         const backToTop = safeGetById('back-to-top');
 
-        const handleScroll = throttle(() => {
-            const scrollY = window.scrollY || window.pageYOffset || 0;
+        let ticking = false;
 
-            // Navbar scroll effect
-            if (navbar) {
-                if (scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY || window.pageYOffset || 0;
+
+                    // Navbar scroll effect
+                    if (navbar) {
+                        if (scrollY > 50) navbar.classList.add('scrolled');
+                        else navbar.classList.remove('scrolled');
+                    }
+
+                    // Scroll progress bar
+                    if (scrollProgress) {
+                        const docHeight = document.documentElement.scrollHeight - window.innerHeight || 1;
+                        const scrollPercent = Math.min((scrollY / docHeight) * 100, 100);
+                        scrollProgress.style.width = scrollPercent + '%';
+                    }
+
+                    // Back to top button visibility
+                    if (backToTop) {
+                        if (scrollY > 300) backToTop.classList.add('visible');
+                        else backToTop.classList.remove('visible');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
             }
+        };
 
-            // Scroll progress bar
-            if (scrollProgress) {
-                try {
-                    const docHeight = Math.max(
-                        document.documentElement.scrollHeight - window.innerHeight,
-                        1 // Prevent division by zero
-                    );
-                    const scrollPercent = Math.min((scrollY / docHeight) * 100, 100);
-                    scrollProgress.style.width = scrollPercent + '%';
-                } catch (e) {
-                    // Fail silently
-                }
-            }
-
-            // Back to top button visibility
-            if (backToTop) {
-                if (scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            }
-        }, 16); // ~60fps
-
-        safeAddListener(window, 'scroll', handleScroll, { passive: true });
+        safeAddListener(window, 'scroll', onScroll, { passive: true });
 
         // Back to top click handler
         if (backToTop) {
@@ -258,8 +254,9 @@
         // Mobile dropdown toggle
         if (dropbtn && dropdown) {
             safeAddListener(dropbtn, 'click', (e) => {
-                // Handle dropdown toggle on click (primarily for mobile/touch)
-                if (window.getComputedStyle(menuToggle).display !== 'none') {
+                // Handle dropdown toggle on click (optimize check for mobile)
+                // If menu toggle is visible (mobile), prevent default link behavior to toggle dropdown
+                if (menuToggle.offsetParent !== null) {
                     e.preventDefault();
                     e.stopPropagation();
                     dropdown.classList.toggle('active');

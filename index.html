@@ -579,9 +579,9 @@
                 </div>
             </div>
             <div class="hero-image fade-in-left delay-1">
-                <!-- Hero image hidden on mobile via critical CSS for better LCP -->
-                <img src="/assets/hero.jpg" alt="Students on campus" width="600" height="400" loading="lazy"
-                    decoding="async" style="aspect-ratio: 3/2;">
+                <!-- Hero image optimized for LCP -->
+                <img src="/assets/hero.jpg" alt="Students on campus" width="600" height="400" loading="eager"
+                    fetchpriority="high" decoding="async" style="aspect-ratio: 3/2;">
             </div>
         </div>
         <div class="hero-background-blur"></div>

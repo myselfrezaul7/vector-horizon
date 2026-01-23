@@ -60,6 +60,18 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent; /* Remove gray tap highlight on iOS */
+}
+
+/* Mobile Performance */
+a, button, input, select, textarea {
+    touch-action: manipulation; /* Disable double-tap zoom delay */
+}
+
+/* GPU Acceleration for smooth animations */
+.navbar, .menu-toggle, .dropdown-content {
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 h1,
@@ -296,10 +308,12 @@ button {
 }
 
 .menu-toggle {
-    display: none;
     background: none;
     color: var(--primary-color);
     font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 /* Hero Section */
