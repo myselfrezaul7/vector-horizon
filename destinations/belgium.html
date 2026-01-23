@@ -36,6 +36,27 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nextepedu.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Study in Belgium", "item": "https://nextepedu.com/destinations/belgium.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Study in Belgium Consultation",
+          "description": "Expert guidance for students in Bangladesh wishing to study in Belgium. Visa, admission, and scholarship assistance.",
+          "provider": { "@id": "https://nextepedu.com/#organization" },
+          "areaServed": { "@type": "Country", "name": "Bangladesh" }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -329,3 +350,4 @@
 <script src="/performance.js" defer></script></body>
 
 </html>
+
