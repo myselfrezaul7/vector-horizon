@@ -1384,26 +1384,11 @@ footer::before {
     }
 
     .dropdown.active .dropdown-content {
-        display: block;
+        display: block !important;
         max-height: 500px;
         padding: 0.5rem 0;
-    }
-
-    .dropdown-content a {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        text-align: center;
-    }
-
-    /* Disable hover on mobile */
-    .dropdown:hover .dropdown-content {
-        display: none;
-        max-height: 0;
-    }
-
-    .dropdown.active:hover .dropdown-content {
-        display: block;
-        max-height: 500px;
+        visibility: visible;
+        opacity: 1;
     }
 }
 

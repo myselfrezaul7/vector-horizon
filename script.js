@@ -258,8 +258,8 @@
         // Mobile dropdown toggle
         if (dropbtn && dropdown) {
             safeAddListener(dropbtn, 'click', (e) => {
-                // Only handle on mobile (when menu toggle is visible)
-                if (window.innerWidth <= 768) {
+                // Handle dropdown toggle on click (primarily for mobile/touch)
+                if (window.getComputedStyle(menuToggle).display !== 'none') {
                     e.preventDefault();
                     e.stopPropagation();
                     dropdown.classList.toggle('active');
