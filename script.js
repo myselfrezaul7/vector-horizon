@@ -689,26 +689,155 @@
         }
     }
 
+    // ==========================================
+    // Toast Notification System
+    // ==========================================
+
     /**
-     * Show form error message (replaces alert for better UX)
+     * Create and manage toast notifications
+     */
+    const toastManager = {
+        container: null,
+        queue: [],
+        maxVisible: 3,
+
+        init: function () {
+            if (this.container) return;
+
+            this.container = document.createElement('div');
+            this.container.id = 'toast-container';
+            this.container.setAttribute('aria-live', 'polite');
+            this.container.setAttribute('aria-atomic', 'true');
+            document.body.appendChild(this.container);
+        },
+
+        show: function (message, type = 'info', duration = 5000) {
+            this.init();
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.setAttribute('role', 'alert');
+
+            const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+
+            toast.innerHTML = `
+                <span class="toast-icon">${icon}</span>
+                <span class="toast-message">${this.escapeHtml(message)}</span>
+                <button class="toast-close" aria-label="Close notification">&times;</button>
+            `;
+
+            // Add close button handler
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => this.dismiss(toast));
+
+            this.container.appendChild(toast);
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                toast.classList.add('toast-show');
+            });
+
+            // Auto-dismiss
+            const dismissTimer = setTimeout(() => this.dismiss(toast), duration);
+            toast._dismissTimer = dismissTimer;
+
+            // Pause timer on hover
+            toast.addEventListener('mouseenter', () => {
+                clearTimeout(toast._dismissTimer);
+            });
+
+            toast.addEventListener('mouseleave', () => {
+                toast._dismissTimer = setTimeout(() => this.dismiss(toast), 2000);
+            });
+
+            return toast;
+        },
+
+        dismiss: function (toast) {
+            if (!toast || toast._dismissed) return;
+            toast._dismissed = true;
+
+            clearTimeout(toast._dismissTimer);
+            toast.classList.remove('toast-show');
+            toast.classList.add('toast-hide');
+
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        },
+
+        escapeHtml: function (text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    };
+
+    /**
+     * Show form error message with toast notification
      * @param {string} message - Error message to display
      */
     function showFormError(message) {
-        // Use a nicer notification if available, fallback to alert
-        if (window.Notification && Notification.permission === 'granted') {
-            new Notification('Form Error', { body: message });
-        } else {
-            alert('⚠️ ' + message);
-        }
+        toastManager.show(message, 'error', 6000);
     }
 
     /**
-     * Show form success message
+     * Show form success message with toast notification
      * @param {string} message - Success message to display
      */
     function showFormSuccess(message) {
-        alert(message);
+        toastManager.show(message, 'success', 5000);
     }
+
+    /**
+     * Show info toast
+     * @param {string} message - Info message to display
+     */
+    function showToast(message, type = 'info') {
+        toastManager.show(message, type);
+    }
+
+    // ==========================================
+    // Global Error Handling
+    // ==========================================
+
+    /**
+     * Global error handler for unhandled exceptions
+     */
+    window.addEventListener('error', function (event) {
+        console.error('Unhandled error:', event.error);
+        // Don't show toast for script loading errors
+        if (event.filename && !event.filename.includes(window.location.hostname)) {
+            return;
+        }
+    });
+
+    /**
+     * Handle unhandled promise rejections
+     */
+    window.addEventListener('unhandledrejection', function (event) {
+        console.error('Unhandled promise rejection:', event.reason);
+        event.preventDefault(); // Prevent console error
+    });
+
+    /**
+     * Network status detection
+     */
+    let wasOffline = false;
+
+    window.addEventListener('online', function () {
+        if (wasOffline) {
+            showToast('Connection restored! 🌐', 'success');
+            wasOffline = false;
+        }
+    });
+
+    window.addEventListener('offline', function () {
+        wasOffline = true;
+        showToast('You appear to be offline. Some features may not work.', 'error');
+    });
 
     // ==========================================
     // Carousel

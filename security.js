@@ -1,6 +1,6 @@
 /**
  * NexTep Edu - Security Utilities
- * Bot protection, XSS prevention, and rate limiting
+ * Bot protection, XSS prevention, CSRF protection, and rate limiting
  */
 
 (function () {
@@ -19,7 +19,20 @@
         minSubmitTimeMs: 2000, // Minimum 2 seconds to fill form (humans take longer)
 
         // Honeypot field name
-        honeypotFieldName: 'website_url'
+        honeypotFieldName: 'website_url',
+
+        // Input length limits (prevent buffer overflow attacks)
+        maxInputLengths: {
+            name: 100,
+            email: 254,
+            phone: 20,
+            message: 2000,
+            default: 500
+        },
+
+        // CSRF token settings
+        csrfTokenName: 'nextep_csrf_token',
+        csrfTokenExpiry: 30 * 60 * 1000 // 30 minutes
     };
 
     // ==========================================
@@ -197,6 +210,18 @@
             }
         }
 
+        // Check 5: Input length validation
+        for (const [key, value] of Object.entries(formData)) {
+            const maxLength = SECURITY_CONFIG.maxInputLengths[key] || SECURITY_CONFIG.maxInputLengths.default;
+            if (typeof value === 'string' && value.length > maxLength) {
+                console.warn(`Security: Input too long in field ${key}`);
+                return {
+                    passed: false,
+                    error: `The ${key} field is too long. Please shorten your input.`
+                };
+            }
+        }
+
         return { passed: true, error: null };
     }
 
@@ -211,6 +236,94 @@
             sanitized[key] = sanitizeInput(value);
         }
         return sanitized;
+    }
+
+    // ==========================================
+    // CSRF Token Protection
+    // ==========================================
+
+    /**
+     * Generate a cryptographically secure random token
+     * @returns {string} Random token
+     */
+    function generateToken() {
+        const array = new Uint8Array(32);
+        if (window.crypto && window.crypto.getRandomValues) {
+            window.crypto.getRandomValues(array);
+        } else {
+            // Fallback for older browsers
+            for (let i = 0; i < 32; i++) {
+                array[i] = Math.floor(Math.random() * 256);
+            }
+        }
+        return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    /**
+     * Get or create CSRF token
+     * @returns {string} CSRF token
+     */
+    function getCSRFToken() {
+        try {
+            const stored = sessionStorage.getItem(SECURITY_CONFIG.csrfTokenName);
+            if (stored) {
+                const data = JSON.parse(stored);
+                if (Date.now() < data.expiry) {
+                    return data.token;
+                }
+            }
+        } catch (e) {
+            // sessionStorage not available
+        }
+        return refreshCSRFToken();
+    }
+
+    /**
+     * Generate new CSRF token
+     * @returns {string} New CSRF token
+     */
+    function refreshCSRFToken() {
+        const token = generateToken();
+        try {
+            sessionStorage.setItem(SECURITY_CONFIG.csrfTokenName, JSON.stringify({
+                token,
+                expiry: Date.now() + SECURITY_CONFIG.csrfTokenExpiry
+            }));
+        } catch (e) {
+            // sessionStorage not available
+        }
+        return token;
+    }
+
+    // ==========================================
+    // URL Validation (Redirect Protection)
+    // ==========================================
+
+    /**
+     * Validate if a URL is safe for redirect
+     * @param {string} url - URL to validate
+     * @returns {boolean} True if URL is safe
+     */
+    function isSafeRedirectUrl(url) {
+        if (!url || typeof url !== 'string') return false;
+
+        try {
+            const parsed = new URL(url, window.location.origin);
+
+            // Only allow same-origin redirects
+            if (parsed.origin !== window.location.origin) {
+                return false;
+            }
+
+            // Block dangerous protocols
+            if (!['http:', 'https:'].includes(parsed.protocol)) {
+                return false;
+            }
+
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
     // ==========================================
@@ -232,6 +345,13 @@
         recordFormOpen,
         isSubmissionTooFast,
 
+        // CSRF protection
+        getCSRFToken,
+        refreshCSRFToken,
+
+        // URL validation
+        isSafeRedirectUrl,
+
         // Comprehensive check
         performSecurityChecks,
 
@@ -242,3 +362,4 @@
     console.log('NexTep Security: Module loaded');
 
 })();
+
