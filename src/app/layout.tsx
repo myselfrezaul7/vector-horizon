@@ -18,6 +18,10 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.nextepedu.com'),
+  alternates: {
+    canonical: './',
+  },
   title: "NexTep Edu | Build Your Future Abroad",
   description: "Premier higher study consultancy in Bangladesh helping students achieve their dreams of studying in UK, USA, Canada, Australia, Germany and 20+ countries.",
 };
