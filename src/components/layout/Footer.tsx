@@ -19,10 +19,6 @@ export function Footer() {
                     <p className="text-sm leading-relaxed text-slate-400">
                         Your trusted partner for global education. We simplify the journey from application to admission.
                     </p>
-                    <div className="flex gap-4 pt-2">
-                        <a href="https://facebook.com/nextepbd" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><Facebook className="w-5 h-5" /></a>
-                        <a href="https://instagram.com/nextepedu" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
-                    </div>
                 </div>
 
                 {/* Quick Links */}
@@ -68,9 +64,15 @@ export function Footer() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-                &copy; {new Date().getFullYear()} NexTep Edu. All rights reserved.
+            <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center">
+                <div className="flex justify-center gap-4 mb-4">
+                    <a href="https://facebook.com/nextepbd" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-accent transition-colors"><Facebook className="w-5 h-5" /></a>
+                    <a href="https://instagram.com/nextepedu" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
+                </div>
+                <p className="text-xs text-slate-500">
+                    &copy; {new Date().getFullYear()} NexTep Edu. All rights reserved.
+                </p>
             </div>
-        </footer>
+        </footer >
     );
 }
