@@ -70,7 +70,7 @@ export function Footer() {
                     <a href="https://instagram.com/nextepedu" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-accent transition-colors"><Instagram className="w-5 h-5" /></a>
                 </div>
                 <p className="text-xs text-slate-500">
-                    &copy; {new Date().getFullYear()} NexTep Edu. All rights reserved.
+                    &copy; 2025 NexTep Edu. All rights reserved.
                 </p>
             </div>
         </footer >
