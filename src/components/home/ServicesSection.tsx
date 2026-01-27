@@ -12,12 +12,12 @@ const services = [
     },
     {
         title: "The Visa Stuff",
-        description: "Yeah, visas are a headache. Documents, bank statements, interview prep — it's a lot. We'll handle the paperwork chaos and make sure you walk into that embassy feeling ready.",
+        description: "Yeah, visas are a headache. Documents, bank statements, interview prep... it's a lot. We'll handle the paperwork chaos and make sure you walk into that embassy feeling ready.",
         icon: FileCheck,
     },
     {
         title: "Career Planning",
-        description: "A degree's great, but then what? We help you think long-term — internships, work permits, industry connections. Because getting a job after graduation matters just as much as getting in.",
+        description: "A degree's great, but then what? We help you think long-term: internships, work permits, industry connections. Because getting a job after graduation matters just as much as getting in.",
         icon: Compass,
     },
     {
@@ -47,7 +47,7 @@ export function ServicesSection() {
                         transition={{ delay: 0.1 }}
                         className="text-lg text-muted-foreground"
                     >
-                        Here's the deal — we don't just give you a list of universities and wish you luck. We stick with you from day one until you're settled in your dorm room abroad.
+                        Here's the deal: we don't just give you a list of universities and wish you luck. We stick with you from day one until you're settled in your dorm room abroad.
                     </motion.p>
                 </div>
 

@@ -92,7 +92,7 @@ export default async function DestinationPage({ params }: Props) {
                 <div className="container mx-auto px-4">
                     <div className="text-center max-w-2xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-primary">Universities We Work With</h2>
-                        <p className="text-muted-foreground">From historic institutions to cutting-edge research hubs — take your pick.</p>
+                        <p className="text-muted-foreground">From historic institutions to cutting-edge research hubs. Take your pick.</p>
                     </div>
 
                     <div className="grid gap-4 max-w-3xl mx-auto">

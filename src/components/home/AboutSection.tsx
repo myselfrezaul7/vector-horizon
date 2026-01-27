@@ -29,7 +29,7 @@ export function AboutSection() {
                 >
                     <h2 className="text-3xl md:text-5xl font-bold font-heading mb-6 text-primary">Why Do People Choose Us?</h2>
                     <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                        Honestly? Because we've been in your shoes. Our team includes people who went through this exact process — the stress, the excitement, the million questions. We know what it's like to feel lost navigating all of this. That's why we don't treat you like just another application file. You're a person with dreams, and we take that seriously.
+                        Honestly? Because we've been in your shoes. Our team includes people who went through this exact process: the stress, the excitement, the million questions. We know what it's like to feel lost navigating all of this. That's why we don't treat you like just another application file. You're a person with dreams, and we take that seriously.
                     </p>
 
                     <ul className="space-y-4 mb-8">

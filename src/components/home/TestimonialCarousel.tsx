@@ -21,7 +21,7 @@ const testimonials = [
         initials: "FA",
     },
     {
-        text: "What I loved is they didn't just help with applications — they helped me figure out where to live, how to manage money abroad, everything. It's like having an older sibling who's been through it all.",
+        text: "What I loved is they didn't just help with applications, they helped me figure out where to live, how to manage money abroad, everything. It's like having an older sibling who's been through it all.",
         author: "Tanvir Hasan",
         university: "Monash University, Australia",
         flag: "🇦🇺",
@@ -35,7 +35,7 @@ const testimonials = [
         initials: "NJ",
     },
     {
-        text: "From choosing the right program to getting my visa approved — NexTep was there every step of the way. The team genuinely cares about your success, and that made all the difference.",
+        text: "From choosing the right program to getting my visa approved, NexTep was there every step of the way. The team genuinely cares about your success, and that made all the difference.",
         author: "Sadia Khan",
         university: "TU Munich, Germany",
         flag: "🇩🇪",

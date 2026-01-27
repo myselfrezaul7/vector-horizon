@@ -38,7 +38,7 @@ export function HeroSection() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-lg text-muted-foreground max-w-lg leading-relaxed"
                     >
-                        Look, we get it — applying abroad feels overwhelming. So many forms, so many questions, so many "what ifs." That's exactly why we're here. We've walked this path ourselves, and now we help students like you navigate it. No fancy jargon. No hidden costs. Just real people giving you real guidance.
+                        Look, we get it. Applying abroad feels overwhelming. So many forms, so many questions, so many "what ifs." That's exactly why we're here. We've walked this path ourselves, and now we help students like you navigate it. No fancy jargon. No hidden costs. Just real people giving you real guidance.
                     </motion.p>
 
                     <motion.div

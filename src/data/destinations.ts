@@ -82,7 +82,7 @@ export const destinations: Record<string, Destination> = {
             },
             {
                 title: "Campus Life",
-                description: "It's exactly like the movies. Sports, clubs, Greek life — US campuses are their own little cities.",
+                description: "It's exactly like the movies. Sports, clubs, Greek life... US campuses are their own little cities.",
                 icon: Users,
             },
             {
