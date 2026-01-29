@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
     {
@@ -44,31 +42,6 @@ const testimonials = [
 ];
 
 export function TestimonialCarousel() {
-    // Using simple index state instead of complex manual carousel logic
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(1);
-
-    // Responsive items per page
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 1024) setItemsPerPage(3);
-            else if (window.innerWidth >= 768) setItemsPerPage(2);
-            else setItemsPerPage(1);
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const totalPages = Math.ceil(testimonials.length / itemsPerPage);
-
-    const nextSlide = () => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    };
-
-    // Just show 3 at a time in a simple looped grid for MVP, or a true carousel.
-    // Let's do a simple animated slider.
-
     return (
         <section id="stories" className="py-24 bg-surface dark:bg-card/50 relative overflow-hidden">
             {/* Background Pattern */}
@@ -85,54 +58,52 @@ export function TestimonialCarousel() {
                     </p>
                 </div>
 
-                {/* Carousel Container */}
-                <div className="relative">
-                    <div className="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-hide">
-                        {testimonials.map((story, i) => (
-                            <motion.div
-                                key={i}
-                                className="min-w-[300px] md:min-w-[350px] flex-none snap-center"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                            >
-                                <div className="bg-gradient-to-br from-card to-slate-50 dark:from-slate-800 dark:to-slate-900 p-8 rounded-2xl border border-accent/10 hover:border-accent/30 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full flex flex-col relative group">
-                                    {/* Top Accent Line */}
-                                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-yellow-400 to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl" />
+                {/* Card Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {testimonials.map((story, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                        >
+                            <div className="bg-gradient-to-br from-card to-slate-50 dark:from-slate-800 dark:to-slate-900 p-6 md:p-8 rounded-2xl border border-accent/10 hover:border-accent/30 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full flex flex-col relative group">
+                                {/* Top Accent Line */}
+                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-yellow-400 to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl" />
 
-                                    <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-6 text-accent">
-                                        <Quote className="w-6 h-6 fill-current" />
+                                {/* Header with Quote and Stars */}
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center text-accent">
+                                        <Quote className="w-5 h-5 fill-current" />
                                     </div>
-
-                                    <div className="flex gap-1 mb-4 text-yellow-400">
+                                    <div className="flex gap-0.5 text-yellow-400">
                                         {[1, 2, 3, 4, 5].map((s) => (
                                             <Star key={s} className="w-4 h-4 fill-current" />
                                         ))}
                                     </div>
+                                </div>
 
-                                    <p className="text-muted-foreground italic mb-6 flex-grow leading-relaxed">
-                                        "{story.text}"
-                                    </p>
+                                {/* Testimonial Text */}
+                                <p className="text-muted-foreground italic mb-6 flex-grow leading-relaxed text-sm md:text-base">
+                                    "{story.text}"
+                                </p>
 
-                                    <div className="flex items-center gap-4 pt-6 border-t border-border/50">
-                                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center text-slate-900 font-bold shadow-lg">
-                                            {story.initials}
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-primary">{story.author}</h4>
-                                            <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                                                <span className="text-base">{story.flag}</span> {story.university}
-                                            </p>
-                                        </div>
+                                {/* Author Info */}
+                                <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-yellow-400 flex items-center justify-center text-slate-900 font-bold text-sm shadow-lg flex-shrink-0">
+                                        {story.initials}
+                                    </div>
+                                    <div className="min-w-0">
+                                        <h4 className="font-bold text-primary text-sm">{story.author}</h4>
+                                        <p className="text-xs text-muted-foreground flex items-center gap-1 truncate">
+                                            <span>{story.flag}</span> {story.university}
+                                        </p>
                                     </div>
                                 </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Gradient Fade for scroll indication */}
-                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
