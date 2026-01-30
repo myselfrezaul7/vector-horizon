@@ -76,7 +76,7 @@ export function HeroSection() {
                 >
                     <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-transform duration-500 hover:rotate-y-0 -rotate-y-6 bg-white p-2 border border-white/20">
                         <Image
-                            src="/assets/hero.jpg"
+                            src="/assets/hero-new.png"
                             alt="Students on campus"
                             width={600}
                             height={400}
