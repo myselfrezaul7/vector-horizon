@@ -1,462 +1,326 @@
-import { Award, Clock, Briefcase, Globe, GraduationCap, Users, Landmark, Sun, BookOpen, MapPin, DollarSign } from "lucide-react";
+import { LucideIcon, MapPin, GraduationCap, Building2, Globe2, Wallet, Clock, Users, BookOpen, Trophy, Sun, Coffee, Landmark, Train, DollarSign, Briefcase, Award, Globe } from "lucide-react";
 
-export type Destination = {
+export interface University {
+    name: string;
+}
+
+export interface Benefit {
+    title: string;
+    description: string;
+    icon: LucideIcon;
+}
+
+export interface Destination {
     slug: string;
     name: string;
+    heroImage: string;
     hero: {
         title: string;
         description: string;
-        icon: any; // Lucide Icon
+        icon: LucideIcon;
     };
-    benefits: {
-        title: string;
-        description: string;
-        icon: any;
-    }[];
-    universities: {
-        name: string;
-        campusImage: string;
-        atmosphereImage: string;
-    }[];
-};
+    benefits: Benefit[];
+    universities: University[];
+}
 
 export const destinations: Record<string, Destination> = {
     uk: {
         slug: "uk",
         name: "United Kingdom",
+        heroImage: "/assets/uk_hero_blend_1769798778947.png",
         hero: {
             title: "Study in the UK",
-            description: "There's a reason people have been flocking to British universities for centuries. The education is solid, the culture is rich, and honestly? That accent doesn't hurt either.",
-            icon: Landmark,
+            description: "Home to some of the world's oldest and most prestigious universities. A degree from the UK is recognized globally.",
+            icon: Building2,
         },
         benefits: [
-            {
-                title: "Degrees That Open Doors",
-                description: "A UK degree carries weight everywhere. Employers worldwide recognize the rigorous standards.",
-                icon: Award,
-            },
-            {
-                title: "Finish Faster",
-                description: "Three-year bachelor's degrees and one-year master's programs mean saving time and money.",
-                icon: Clock,
-            },
-            {
-                title: "Stay and Work",
-                description: "The Graduate Route visa lets you stick around for 2 years after graduating to find work.",
-                icon: Briefcase,
-            },
-            {
-                title: "Cultural Melting Pot",
-                description: "London alone has people from over 180 countries. You'll make friends from everywhere.",
-                icon: Globe,
-            },
+            { title: "World-Class Education", description: "Home to 4 of the top 10 universities in the world.", icon: Trophy },
+            { title: "Short Duration", description: "Complete your Master's in just 1 year.", icon: Clock },
+            { title: "Work Opportunities", description: "2-year Post-Study Work Visa (PSW) available.", icon: Users },
+            { title: "Cultural Hub", description: "Experience a rich history and diverse culture.", icon: Globe2 },
         ],
         universities: [
-            { name: "University of Oxford", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "University of Cambridge", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "Imperial College London", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "UCL (University College London)", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "University of Edinburgh", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "King's College London", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
-            { name: "University of Manchester", campusImage: "/assets/uk-uni.png", atmosphereImage: "/assets/uk-atm.png" },
+            { name: "University of Oxford" },
+            { name: "University of Cambridge" },
+            { name: "Imperial College London" },
+            { name: "University of Manchester" },
+            { name: "University of Edinburgh" },
         ],
     },
     usa: {
         slug: "usa",
         name: "USA",
+        heroImage: "/assets/usa_hero_blend_1769798792932.png",
         hero: {
             title: "Study in the USA",
-            description: "Home to the Ivy League and Silicon Valley. If you want to dream big and hustle hard, this is the place to be.",
-            icon: GraduationCap,
+            description: "The dream destination for international students. Limitless opportunities and cutting-edge research.",
+            icon: Landmark,
         },
         benefits: [
-            {
-                title: "World-Class Education",
-                description: "US universities dominate global rankings. You're getting a brand name on your resume.",
-                icon: Award,
-            },
-            {
-                title: "Flexibility",
-                description: "Change your major, double major, take weird electives. Explore before you commit.",
-                icon: BookOpen,
-            },
-            {
-                title: "Campus Life",
-                description: "Sports, clubs, Greek life... US campuses are their own little cities.",
-                icon: Users,
-            },
-            {
-                title: "OPT Opportunities",
-                description: "Work for up to 3 years after graduation in STEM fields. A massive career boost.",
-                icon: Briefcase,
-            },
+            { title: "Academic Excellence", description: "Home to the majority of the world's top universities.", icon: BookOpen },
+            { title: "Flexible Education", description: "Choose from a vast range of majors and minors.", icon: MapPin },
+            { title: "Career Growth", description: "Optional Practical Training (OPT) for up to 3 years.", icon: Wallet },
+            { title: "Innovation Hub", description: "Be at the center of technological advancement.", icon: Sun },
         ],
         universities: [
-            { name: "Harvard University", campusImage: "/assets/usa-uni.png", atmosphereImage: "/assets/usa-atm.png" },
-            { name: "Stanford University", campusImage: "/assets/usa-uni.png", atmosphereImage: "/assets/usa-atm.png" },
-            { name: "MIT", campusImage: "/assets/usa-uni.png", atmosphereImage: "/assets/usa-atm.png" },
-            { name: "UCLA", campusImage: "/assets/usa-uni.png", atmosphereImage: "/assets/usa-atm.png" },
-            { name: "Columbia University", campusImage: "/assets/usa-uni.png", atmosphereImage: "/assets/usa-atm.png" },
-        ],
-    },
-    australia: {
-        slug: "australia",
-        name: "Australia",
-        hero: {
-            title: "Study in Australia",
-            description: "World-class education meets an unbeatable lifestyle. Surf before class, barbecue after.",
-            icon: Sun,
-        },
-        benefits: [
-            {
-                title: "Top Universities",
-                description: "Australia has 7 of the top 100 universities in the world.",
-                icon: Award,
-            },
-            {
-                title: "Work While Studying",
-                description: "Generous work rights for international students.",
-                icon: Briefcase,
-            },
-            {
-                title: "Quality of Life",
-                description: "Consistently ranked as one of the best places to live in the world.",
-                icon: Globe,
-            },
-            {
-                title: "Post-Study Work",
-                description: "Stay and work in Australia for up to 4-6 years depending on your degree.",
-                icon: Clock,
-            },
-        ],
-        universities: [
-            { name: "University of Melbourne", campusImage: "/assets/australia-uni.png", atmosphereImage: "/assets/australia-atm.png" },
-            { name: "Australian National University", campusImage: "/assets/australia-uni.png", atmosphereImage: "/assets/australia-atm.png" },
-            { name: "University of Sydney", campusImage: "/assets/australia-uni.png", atmosphereImage: "/assets/australia-atm.png" },
+            { name: "Harvard University" },
+            { name: "Stanford University" },
+            { name: "MIT" },
+            { name: "University of California, Berkeley" },
+            { name: "Columbia University" },
         ],
     },
     canada: {
         slug: "canada",
         name: "Canada",
+        heroImage: "/assets/canada_hero_blend_1769798822200.png",
         hero: {
             title: "Study in Canada",
-            description: "Friendly people, stunning nature, and a welcoming environment for international students.",
+            description: "High quality of life, welcoming environment, and excellent post-study work options.",
             icon: MapPin,
         },
         benefits: [
-            {
-                title: "Affordable Excellence",
-                description: "High academic standards with lower tuition fees than the US or UK.",
-                icon: DollarSign,
-            },
-            {
-                title: "Path to PR",
-                description: "One of the most straightforward pathways to permanent residency.",
-                icon: Briefcase,
-            },
-            {
-                title: "Multicultural",
-                description: "A truly diverse society where meaningful inclusion is the norm.",
-                icon: Globe,
-            },
-            {
-                title: "Tech Hubs",
-                description: "Growing tech scenes in Toronto, Vancouver, and Montreal.",
-                icon: Briefcase,
-            },
+            { title: "High Quality of Life", description: "Consistently ranked as one of the best places to live.", icon: Sun },
+            { title: "Post-Grad Work Permit", description: "Work for up to 3 years after graduation.", icon: Wallet },
+            { title: "Affordable Education", description: "Lower tuition fees compared to US and UK.", icon: Wallet },
+            { title: "Multicultural Society", description: "A diverse and inclusive community.", icon: Users },
         ],
         universities: [
-            { name: "University of Toronto", campusImage: "/assets/canada-uni.png", atmosphereImage: "/assets/canada-atm.png" },
-            { name: "University of British Columbia", campusImage: "/assets/canada-uni.png", atmosphereImage: "/assets/canada-atm.png" },
-            { name: "McGill University", campusImage: "/assets/canada-uni.png", atmosphereImage: "/assets/canada-atm.png" },
+            { name: "University of Toronto" },
+            { name: "University of British Columbia" },
+            { name: "McGill University" },
+            { name: "McMaster University" },
+            { name: "University of Montreal" },
+        ],
+    },
+    australia: {
+        slug: "australia",
+        name: "Australia",
+        heroImage: "/assets/australia_hero_blend_1769798807824.png",
+        hero: {
+            title: "Study in Australia",
+            description: "Beautiful landscapes, laid-back culture, and a world-class education system.",
+            icon: Sun,
+        },
+        benefits: [
+            { title: "Global Recognition", description: "Degrees are recognized worldwide.", icon: Globe2 },
+            { title: "Work while Studying", description: "Work up to 48 hours per fortnight.", icon: Clock },
+            { title: "Post-Study Work", description: "Stay and work for 2-4 years after graduation.", icon: Wallet },
+            { title: "Great Lifestyle", description: "Enjoy beaches, cities, and the outback.", icon: Coffee },
+        ],
+        universities: [
+            { name: "University of Melbourne" },
+            { name: "University of Sydney" },
+            { name: "Australian National University" },
+            { name: "University of Queensland" },
+            { name: "Monash University" },
         ],
     },
     germany: {
         slug: "germany",
         name: "Germany",
+        heroImage: "/assets/germany_hero_blend_1769798837339.png",
         hero: {
             title: "Study in Germany",
-            description: "Innovation, engineering, and (often) tuition-free education at public universities.",
-            icon: Landmark,
+            description: "Tuition-free education at public universities and a hub for engineering and technology.",
+            icon: Building2,
         },
         benefits: [
-            {
-                title: "No Tuition Fees",
-                description: "Most public universities are tuition-free for international students.",
-                icon: DollarSign,
-            },
-            {
-                title: "Strong Economy",
-                description: "The largest economy in Europe with endless career opportunities.",
-                icon: Briefcase,
-            },
-            {
-                title: "English Programs",
-                description: "Many master's programs are taught entirely in English.",
-                icon: BookOpen,
-            },
-            {
-                title: "Central Europe",
-                description: "Travel easily to France, Netherlands, Austria, and more.",
-                icon: MapPin,
-            },
+            { title: "Low/No Tuition", description: "Most public universities are tuition-free.", icon: Wallet },
+            { title: "Strong Economy", description: "Largest economy in Europe with many job opportunities.", icon: Trophy },
+            { title: "Research Focus", description: "Emphasis on practical and theoretical research.", icon: BookOpen },
+            { title: "Central Europe", description: "Easy travel to other European countries.", icon: Train },
         ],
         universities: [
-            { name: "Technical University of Munich", campusImage: "/assets/germany-uni.png", atmosphereImage: "/assets/germany-atm.png" },
-            { name: "Ludwig Maximilian University", campusImage: "/assets/germany-uni.png", atmosphereImage: "/assets/germany-atm.png" },
-            { name: "Heidelberg University", campusImage: "/assets/germany-uni.png", atmosphereImage: "/assets/germany-atm.png" },
+            { name: "Technical University of Munich" },
+            { name: "Ludwig Maximilian University of Munich" },
+            { name: "Heidelberg University" },
+            { name: "Humboldt University of Berlin" },
+            { name: "RWTH Aachen University" },
         ],
     },
     france: {
         slug: "france",
         name: "France",
+        heroImage: "/assets/france_hero_blend_1769798860272.png",
         hero: {
             title: "Study in France",
-            description: "Art, fashion, cuisine, and world-renowned institutions in the heart of Europe.",
-            icon: Globe,
+            description: "Art, culture, and prestige. France offers a unique study experience in the heart of Europe.",
+            icon: Coffee,
         },
         benefits: [
-            {
-                title: "Affordable Education",
-                description: "Public universities offer very low tuition rates.",
-                icon: DollarSign,
-            },
-            {
-                title: "Culture",
-                description: "Immerse yourself in a country rich in history and culture.",
-                icon: Landmark,
-            },
-            {
-                title: "Language",
-                description: "Learn French, a global language spoken by millions.",
-                icon: BookOpen,
-            },
-            {
-                title: "Research",
-                description: "Strong focus on research and innovation.",
-                icon: Award,
-            },
+            { title: "Cultural Heritage", description: "Immerse yourself in art, fashion, and history.", icon: Landmark },
+            { title: "Affordable Education", description: "Public universities have low tuition fees.", icon: Wallet },
+            { title: "Research & Innovation", description: "Strong focus on science and research.", icon: BookOpen },
+            { title: "Language", description: "Learn one of the most spoken languages in the world.", icon: Users },
         ],
         universities: [
-            { name: "Sorbonne University", campusImage: "/assets/france-uni.png", atmosphereImage: "/assets/france-atm.png" },
-            { name: "École Polytechnique", campusImage: "/assets/france-uni.png", atmosphereImage: "/assets/france-atm.png" },
-            { name: "PSL Research University", campusImage: "/assets/france-uni.png", atmosphereImage: "/assets/france-atm.png" },
+            { name: "Sorbonne University" },
+            { name: "École Polytechnique" },
+            { name: "PSL Research University" },
+            { name: "University of Paris-Saclay" },
+            { name: "Sciences Po" },
         ],
     },
     china: {
         slug: "china",
         name: "China",
+        heroImage: "/assets/china_hero_blend_1769798874661.png",
         hero: {
             title: "Study in China",
-            description: "Experience a blend of ancient tradition and futuristic innovation.",
-            icon: Globe,
+            description: "A blend of ancient tradition and modern innovation. Rapidly growing education sector.",
+            icon: Globe2,
         },
         benefits: [
-            {
-                title: "Global Powerhouse",
-                description: "Understand the world's second-largest economy from the inside.",
-                icon: Briefcase,
-            },
-            {
-                title: "Scholarships",
-                description: "Generous government scholarships available for international students.",
-                icon: DollarSign,
-            },
-            {
-                title: "Language",
-                description: "Master Mandarin, a crucial language for future business.",
-                icon: BookOpen,
-            },
-            {
-                title: "Culture",
-                description: "Explore 5,000 years of history and diverse landscapes.",
-                icon: Landmark,
-            },
+            { title: "Economic Powerhouse", description: "Experience the world's second-largest economy.", icon: Trophy },
+            { title: "Scholarships", description: "Numerous government and university scholarships.", icon: Wallet },
+            { title: "Language & Culture", description: "Learn Mandarin and explore Chinese history.", icon: Users },
+            { title: "Modern Facilities", description: "Universities have state-of-the-art infrastructure.", icon: Building2 },
         ],
         universities: [
-            { name: "Tsinghua University", campusImage: "/assets/china-uni.png", atmosphereImage: "/assets/china-atm.png" },
-            { name: "Peking University", campusImage: "/assets/china-uni.png", atmosphereImage: "/assets/china-atm.png" },
-            { name: "Fudan University", campusImage: "/assets/china-uni.png", atmosphereImage: "/assets/china-atm.png" },
-        ]
+            { name: "Tsinghua University" },
+            { name: "Peking University" },
+            { name: "Fudan University" },
+            { name: "Shanghai Jiao Tong University" },
+            { name: "Zhejiang University" },
+        ],
     },
     netherlands: {
         slug: "netherlands",
         name: "Netherlands",
+        heroImage: "/assets/netherlands_hero_blend_1769798889972.png",
         hero: {
-            title: "Study in the Netherlands",
-            description: "Innovative, open-minded, and English-speaking friendly.",
-            icon: Globe,
+            title: "Study in Netherlands",
+            description: "Innovative teaching, English-taught programs, and an open, international society.",
+            icon: Users,
         },
         benefits: [
-            {
-                title: "English Taught",
-                description: "Largest range of English-taught programs in continental Europe.",
-                icon: BookOpen,
-            },
-            {
-                title: "Teaching Style",
-                description: "Interactive and student-centered learning environment.",
-                icon: Users,
-            },
-            {
-                title: "International",
-                description: "Highly international student community.",
-                icon: Globe,
-            },
-            {
-                title: "Orientation Year",
-                description: "Stay for one year after graduation to find a job.",
-                icon: Clock,
-            },
+            { title: "English Programs", description: "Largest range of English-taught programs in Europe.", icon: BookOpen },
+            { title: "Interactive Teaching", description: "Student-centered learning style.", icon: Users },
+            { title: "International Environment", description: "Home to many international students and companies.", icon: Globe2 },
+            { title: "Cycling Culture", description: "Easy and eco-friendly way to get around.", icon: Sun },
         ],
         universities: [
-            { name: "University of Amsterdam", campusImage: "/assets/netherlands-uni.png", atmosphereImage: "/assets/netherlands-atm.png" },
-            { name: "Delft University of Technology", campusImage: "/assets/netherlands-uni.png", atmosphereImage: "/assets/netherlands-atm.png" },
-            { name: "Utrecht University", campusImage: "/assets/netherlands-uni.png", atmosphereImage: "/assets/netherlands-atm.png" },
-        ]
+            { name: "University of Amsterdam" },
+            { name: "Delft University of Technology" },
+            { name: "Utrecht University" },
+            { name: "Wageningen University & Research" },
+            { name: "Leiden University" },
+        ],
     },
     norway: {
         slug: "norway",
         name: "Norway",
+        heroImage: "/assets/norway_hero_blend_1769798903469.png",
         hero: {
             title: "Study in Norway",
-            description: "Spectacular nature and high-quality education.",
+            description: "Spectacular nature, high standard of living, and tuition-free education for many.",
             icon: Sun,
         },
         benefits: [
-            {
-                title: "Quality of Life",
-                description: "One of the safest and happiest countries in the world.",
-                icon: Globe,
-            },
-            {
-                title: "Nature",
-                description: "Fjords, mountains, and northern lights right at your doorstep.",
-                icon: MapPin,
-            },
-            {
-                title: "English Proficiency",
-                description: "Locals speak excellent English, making life easy.",
-                icon: Users,
-            },
-            {
-                title: "Equality",
-                description: "Egalitarian society with a flat hierarchy.",
-                icon: Users,
-            },
+            { title: "No Tuition Fees", description: "Public universities are free for all students (mostly).", icon: Wallet },
+            { title: "High Quality of Life", description: "One of the safest and happiest countries.", icon: Sun },
+            { title: "Nature", description: "Fjords, mountains, and northern lights.", icon: MapPin },
+            { title: "Modern Society", description: "Technologically advanced and progressive.", icon: Building2 },
         ],
         universities: [
-            { name: "University of Oslo", campusImage: "/assets/norway-uni.png", atmosphereImage: "/assets/norway-atm.png" },
-            { name: "University of Bergen", campusImage: "/assets/norway-uni.png", atmosphereImage: "/assets/norway-atm.png" },
-            { name: "NTNU", campusImage: "/assets/norway-uni.png", atmosphereImage: "/assets/norway-atm.png" },
-        ]
-    },
-    austria: {
-        slug: "austria",
-        name: "Austria",
-        hero: {
-            title: "Study in Austria",
-            description: "Music, history, and academic tradition in the heart of Europe.",
-            icon: Landmark,
-        },
-        benefits: [
-            {
-                title: "Music & Arts",
-                description: "The classical music capital of the world.",
-                icon: Award,
-            },
-            {
-                title: "Quality of Life",
-                description: "Vienna is consistently voted the most livable city.",
-                icon: Globe,
-            },
-            {
-                title: "Central Location",
-                description: "Perfect base for exploring all of Europe.",
-                icon: MapPin,
-            },
-            {
-                title: "Affordable",
-                description: "Low tuition fees for many public universities.",
-                icon: DollarSign,
-            },
+            { name: "University of Oslo" },
+            { name: "University of Bergen" },
+            { name: "Norwegian University of Science and Technology" },
+            { name: "UiT The Arctic University of Norway" },
+            { name: "Norwegian University of Life Sciences" },
         ],
-        universities: [
-            { name: "University of Vienna", campusImage: "/assets/austria-uni.png", atmosphereImage: "/assets/austria-atm.png" },
-            { name: "Vienna University of Technology", campusImage: "/assets/austria-uni.png", atmosphereImage: "/assets/austria-atm.png" },
-            { name: "University of Innsbruck", campusImage: "/assets/austria-uni.png", atmosphereImage: "/assets/austria-atm.png" },
-        ]
-    },
-    belgium: {
-        slug: "belgium",
-        name: "Belgium",
-        hero: {
-            title: "Study in Belgium",
-            description: "The political heart of Europe with a unique mix of cultures.",
-            icon: Landmark,
-        },
-        benefits: [
-            {
-                title: "EU Headquarters",
-                description: "Perfect for students interested in politics and international relations.",
-                icon: Briefcase,
-            },
-            {
-                title: "Multilingual",
-                description: "Speak French, Dutch, German, and English.",
-                icon: Users,
-            },
-            {
-                title: "Chocolate & Waffles",
-                description: "Need we say more? The food is amazing.",
-                icon: Sun, // Using Sun as a placeholder for 'fun/lifestyle'
-            },
-            {
-                title: "Affordable Living",
-                description: "Generally more affordable than neighboring countries.",
-                icon: DollarSign,
-            },
-        ],
-        universities: [
-            { name: "KU Leuven", campusImage: "/assets/belgium-uni.png", atmosphereImage: "/assets/belgium-atm.png" },
-            { name: "Ghent University", campusImage: "/assets/belgium-uni.png", atmosphereImage: "/assets/belgium-atm.png" },
-            { name: "Université catholique de Louvain", campusImage: "/assets/belgium-uni.png", atmosphereImage: "/assets/belgium-atm.png" },
-        ]
     },
     portugal: {
         slug: "portugal",
         name: "Portugal",
+        heroImage: "/assets/portugal_hero_blend_1769798919189.png",
         hero: {
             title: "Study in Portugal",
-            description: "Sunny weather, welcoming people, and rich history.",
+            description: "Affordable living, sunny weather, and a welcoming atmosphere in historic cities.",
             icon: Sun,
         },
         benefits: [
-            {
-                title: "Weather",
-                description: "Enjoy over 300 days of sunshine a year.",
-                icon: Sun,
-            },
-            {
-                title: "Affordable",
-                description: "One of the most affordable countries in Western Europe.",
-                icon: DollarSign,
-            },
-            {
-                title: "Welcoming",
-                description: "Known for its warm hospitality and safety.",
-                icon: Users,
-            },
-            {
-                title: "History",
-                description: "One of the oldest nations in Europe.",
-                icon: Landmark,
-            },
+            { title: "Affordable", description: "Low cost of living and tuition fees.", icon: Wallet },
+            { title: "Weather", description: "Sunny climate year-round.", icon: Sun },
+            { title: "History", description: "Study in some of the oldest universities in Europe.", icon: Landmark },
+            { title: "Safety", description: "Ranked as one of the safest countries in the world.", icon: Trophy },
         ],
         universities: [
-            { name: "University of Lisbon", campusImage: "/assets/portugal-uni.png", atmosphereImage: "/assets/portugal-atm.png" },
-            { name: "University of Porto", campusImage: "/assets/portugal-uni.png", atmosphereImage: "/assets/portugal-atm.png" },
-            { name: "University of Coimbra", campusImage: "/assets/portugal-uni.png", atmosphereImage: "/assets/portugal-atm.png" },
-        ]
+            { name: "University of Lisbon" },
+            { name: "University of Porto" },
+            { name: "University of Coimbra" },
+            { name: "NOVA University Lisbon" },
+            { name: "University of Aveiro" },
+        ],
     },
+    austria: {
+        slug: "austria",
+        name: "Austria",
+        heroImage: "/assets/austria_hero_blend_1769798933623.png",
+        hero: {
+            title: "Study in Austria",
+            description: "Quality education in the heart of Europe, known for its rich musical and cultural history.",
+            icon: Landmark,
+        },
+        benefits: [
+            { title: "High Education Standards", description: "Universities known for academic excellence.", icon: BookOpen },
+            { title: "Music & Arts", description: "The music capital of the world.", icon: Users },
+            { title: "Safe & Stable", description: "High security and social stability.", icon: Trophy },
+            { title: "Quality of Life", description: "Vienna is consistently ranked top for livability.", icon: Sun },
+        ],
+        universities: [
+            { name: "University of Vienna" },
+            { name: "Vienna University of Technology" },
+            { name: "University of Innsbruck" },
+            { name: "Graz University of Technology" },
+            { name: "Johannes Kepler University Linz" },
+        ],
+    },
+    belgium: {
+        slug: "belgium",
+        name: "Belgium",
+        heroImage: "/assets/belgium_hero_blend.png",
+        hero: {
+            title: "Study in Belgium",
+            description: "The heart of the EU, multicultural environment, and high-quality education.",
+            icon: Building2,
+        },
+        benefits: [
+            { title: "International Hub", description: "Home to EU institutions and NATO.", icon: Globe2 },
+            { title: "Multilingual", description: "Opportunity to learn French, Dutch, and German.", icon: Users },
+            { title: "Central Location", description: "Easy travel to Paris, London, Amsterdam.", icon: Train },
+            { title: "Quality Education", description: "Excellent research universities.", icon: BookOpen },
+        ],
+        universities: [
+            { name: "KU Leuven" },
+            { name: "Ghent University" },
+            { name: "Université catholique de Louvain" },
+            { name: "Vrije Universiteit Brussel" },
+            { name: "University of Antwerp" },
+        ],
+    },
+    "south-korea": {
+        slug: "south-korea",
+        name: "South Korea",
+        heroImage: "/assets/hero.jpg",
+        hero: {
+            title: "Study in South Korea",
+            description: "Leading technology, vibrant pop culture, and world-class universities.",
+            icon: Trophy,
+        },
+        benefits: [
+            { title: "Technology Leader", description: "Global leader in IT and robotics.", icon: Sun },
+            { title: "Culture", description: "Experience K-Pop, K-Drama and rich traditions.", icon: Users },
+            { title: "Scholarships", description: "Generous government scholarships (GKS).", icon: Wallet },
+            { title: "Safety", description: "Very safe environment for students.", icon: Trophy },
+        ],
+        universities: [
+            { name: "Seoul National University" },
+            { name: "KAIST" },
+            { name: "Yonsei University" },
+            { name: "Korea University" },
+            { name: "Sungkyunkwan University" },
+        ],
+    }
 };

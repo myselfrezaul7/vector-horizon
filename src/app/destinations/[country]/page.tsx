@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import { BookingButton } from "@/components/common/BookingButton";
 import { destinations } from "@/data/destinations";
 import { CheckCircle, ChevronDown, Check } from "lucide-react";
 
@@ -27,60 +28,61 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DestinationPage({ params }: Props) {
     const { country } = await params;
-    const destination = destinations[country];
+    // Fix key mismatch for canada if it exists as 'canvas' in data vs 'canada' in param
+    const destination = destinations[country] || (country === 'canada' ? destinations['canvas'] : undefined);
 
     if (!destination) {
         return notFound();
     }
 
-    const { hero, benefits, universities } = destination;
+    const { hero, benefits, universities, heroImage } = destination;
     const Icon = hero.icon;
 
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative py-24 bg-surface dark:bg-card overflow-hidden">
-                <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6">
-                        <h1 className="text-4xl md:text-6xl font-bold font-heading text-primary">{hero.title}</h1>
-                        <p className="text-xl text-muted-foreground leading-relaxed">{hero.description}</p>
-                        <div className="flex gap-4 pt-4">
-                            <Button
-                                size="lg"
-                                onClick={() => document.getElementById('booking-modal')?.classList.remove('hidden')} // DOM-based trigger as per quick-port
-                            >
-                                Let's Talk
-                            </Button>
-                            <Button size="lg" variant="outline" asChild>
-                                <a href="#why">Why {destination.name}?</a>
-                            </Button>
-                        </div>
-                    </div>
+            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src={heroImage}
+                        alt={`${destination.name} Scenery`}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+                </div>
 
-                    <div className="flex justify-center">
-                        <div className="w-full max-w-sm aspect-square bg-accent/10 rounded-3xl flex items-center justify-center p-12 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                            <Icon className="w-32 h-32 text-accent" />
-                        </div>
+                <div className="container mx-auto px-4 relative z-10 text-center text-white">
+                    <div className="inline-flex items-center justify-center p-4 bg-white/10 backdrop-blur-md rounded-2xl mb-6 shadow-xl border border-white/20">
+                        <Icon className="w-12 h-12 text-accent" />
+                    </div>
+                    <h1 className="text-4xl md:text-7xl font-bold font-heading mb-6 drop-shadow-md">{hero.title}</h1>
+                    <p className="text-xl md:text-2xl max-w-2xl mx-auto text-white/90 leading-relaxed font-light drop-shadow">
+                        {hero.description}
+                    </p>
+                    <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <BookingButton size="lg" className="text-lg px-8 py-6 shadow-xl shadow-primary/20">
+                            Apply Now
+                        </BookingButton>
+                        <Button size="lg" variant="secondary" className="text-lg px-8 py-6 bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-md" asChild>
+                            <a href="#universities">View Universities</a>
+                        </Button>
                     </div>
                 </div>
             </section>
 
             {/* Benefits Section */}
-            <section id="why" className="py-24 bg-background">
+            <section className="py-24 bg-background">
                 <div className="container mx-auto px-4">
-                    <div className="text-center max-w-2xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-primary">Why Students Love {destination.name}</h2>
-                        <p className="text-muted-foreground">Beyond the stereotypes, here's what actually makes {destination.name} great for studying.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 -mt-32 relative z-20">
                         {benefits.map((benefit, i) => (
-                            <div key={i} className="bg-surface dark:bg-slate-800/50 p-8 rounded-2xl border border-border/50 hover:border-accent hover:shadow-lg transition-all">
-                                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4 text-accent">
+                            <div key={i} className="bg-surface dark:bg-card p-8 rounded-2xl border border-border shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-6 text-accent">
                                     <benefit.icon className="w-6 h-6" />
                                 </div>
-                                <h3 className="text-xl font-bold mb-2 text-primary">{benefit.title}</h3>
-                                <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                                <h3 className="text-xl font-bold mb-3 text-primary">{benefit.title}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
                             </div>
                         ))}
                     </div>
@@ -88,58 +90,42 @@ export default async function DestinationPage({ params }: Props) {
             </section>
 
             {/* Universities Section */}
-            <section className="py-24 bg-surface dark:bg-card">
+            <section id="universities" className="py-24 bg-surface dark:bg-slate-900/50">
                 <div className="container mx-auto px-4">
                     <div className="text-center max-w-2xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-primary">Universities We Work With</h2>
-                        <p className="text-muted-foreground">From historic institutions to cutting-edge research hubs. Take your pick.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-primary">Top Universities in {destination.name}</h2>
+                        <p className="text-muted-foreground">We help you apply to these world-class institutions.</p>
                     </div>
 
-                    <div className="grid gap-4 max-w-3xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         {universities.map((uni, i) => (
-                            <details key={uni.name} className="group bg-background border border-border rounded-xl open:ring-2 open:ring-accent/20 transition-all">
-                                <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-lg md:text-xl text-primary marker:bg-none">
-                                    <span className="flex items-center gap-3">
-                                        <CheckCircle className="w-5 h-5 text-accent" />
-                                        {uni.name}
-                                    </span>
-                                    <ChevronDown className="w-5 h-5 text-muted-foreground group-open:rotate-180 transition-transform" />
-                                </summary>
-                                <div className="px-6 pb-6 pt-2 border-t border-border/50">
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
-                                            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Campus</span>
-                                            <div className="relative aspect-video rounded-lg overflow-hidden bg-slate-100">
-                                                <Image src={uni.campusImage} alt={`${uni.name} Campus`} fill className="object-cover" />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Atmosphere</span>
-                                            <div className="relative aspect-video rounded-lg overflow-hidden bg-slate-100">
-                                                <Image src={uni.atmosphereImage} alt={`${uni.name} Atmosphere`} fill className="object-cover" />
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div key={uni.name} className="group bg-background dark:bg-card p-6 rounded-xl border border-border hover:border-accent/50 hover:shadow-md transition-all flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center shrink-0">
+                                    <CheckCircle className="w-5 h-5 text-primary" />
                                 </div>
-                            </details>
+                                <span className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
+                                    {uni.name}
+                                </span>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 bg-primary text-primary-foreground text-center relative overflow-hidden">
-                <div className="container mx-auto px-4 relative z-10">
-                    <h2 className="text-3xl md:text-5xl font-bold font-heading mb-6">Fancy Studying in {destination.name}?</h2>
-                    <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                        Drop us a message. We'll chat about your options, answer your questions, and help you figure out if {destination.name} is the right fit for you.
+            <section className="py-24 relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary z-0" />
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] z-0 pointer-events-none" />
+
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <h2 className="text-3xl md:text-5xl font-bold font-heading mb-6 text-primary-foreground">Ready to start your journey?</h2>
+                    <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
+                        Your dream university in {destination.name} is just a click away. Book a free consultation with our experts today.
                     </p>
-                    <Button size="lg" variant="secondary" onClick={() => document.getElementById('booking-modal')?.classList.remove('hidden')}>
-                        Book a Free Chat
-                    </Button>
+                    <BookingButton size="lg" variant="secondary" className="text-lg px-8 py-6 shadow-2xl">
+                        Book Free Consultation
+                    </BookingButton>
                 </div>
-                {/* Background Gradient */}
-                <div className="absolute inset-0 bg-accent/10 pointer-events-none" />
             </section>
         </div>
     );
